@@ -12,5 +12,9 @@
   "devDependencies": {
     "pug": "^3.0.3",
     "pug-cli": "^1.0.0-alpha6"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
   }
 }

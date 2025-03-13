@@ -1,0 +1,248 @@
+:root {
+  --Green100: #94d400;
+  --Blue100: #70c0f7;
+  --Night: #0e4266;
+  --buttonWidth: 172px;
+  --buttonHeight: 44px;
+  --buttonRadius: 24px;
+  --buttonFontSize: 18px;
+  --buttonFontWeight: 600;
+  --logoWidth: 270px;
+  --logoHeight: 46px;
+  --containerBottomWidth: 1360px;
+  --containerBottomHeight: 528px;
+  --containerTopPadding: 36px;
+  --containerBottomMargin: 166px;
+  --buttonThemeSize: 44px;
+  --buttonThemeRadius: 64px;
+  --headerTextWeight: 700;
+  --headerTextSize: 88px;
+  --mainTextSize: 48px;
+  --mainTextWeight: 600;
+  --mainTextColor: #20282a;
+  --whiteColor: white;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+header {
+  height: 994px;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.header__top {
+  display: flex;
+  max-width: 1302px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: var(--containerTopPadding);
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+}
+
+.header__logo {
+  width: var(--logoWidth);
+  height: var(--logoHeight);
+}
+
+.header__logo img {
+  width: 100%;
+  height: 100%;
+}
+
+.header__buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 13px;
+  color: var(--whiteColor);
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: var(--buttonFontSize);
+  width: var(--buttonWidth);
+  height: var(--buttonHeight);
+  border-radius: var(--buttonRadius);
+  font-weight: var(--buttonFontWeight);
+}
+
+.button1 {
+  background-color: var(--Green100);
+}
+
+.button2 {
+  background-color: var(--Blue100);
+}
+
+.button3 {
+  background-color: var(--Night);
+  width: var(--buttonThemeSize);
+  height: var(--buttonThemeSize);
+  border-radius: var(--buttonThemeRadius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  margin-left: 8px;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-small {
+  width: 28px;
+  height: 28px;
+}
+
+.header__bottom {
+  max-width: 1296px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.header__text {
+  margin-top: var(--containerBottomMargin);
+  width: var(--containerBottomWidth);
+  height: var(--containerBottomHeight);
+  font-weight: var(--headerTextWeight);
+  font-size: var(--headerTextSize);
+  color: var(--whiteColor);
+  white-space: pre;
+}
+
+.main__text {
+  padding-top: 224px;
+  max-width: 1302px;
+  width: 100%;
+  margin: 0 auto;
+  font-size: var(--mainTextSize);
+  font-weight: var(--mainTextWeight);
+  color: var(--mainTextColor);
+}
+
+.main__text p {
+  margin-bottom: 1em;
+  margin-top: 0;
+}
+
+.main__text p:last-child {
+  margin-bottom: 0;
+}
+
+.highlight {
+  color: var(--Green100);
+}
+
+.main__buttons {
+  padding-top: 128px;
+  padding-bottom: 85px;
+  max-width: 1296px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 48px;
+}
+
+.main__buttons__founded,
+.main__buttons__projects {
+  width: 624px;
+  height: 226px;
+  border-radius: 160px;
+  border: 3px solid rgba(32, 40, 42, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main__buttons__founded img,
+.main__buttons__projects img {
+  width: 42px;
+  height: 76px;
+}
+
+.main__buttons__text {
+  font-size: 140px;
+  font-weight: 700;
+  color: var(--mainTextColor);
+  display: flex;
+  gap: 48px;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.main__buttons__subtext {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--mainTextColor);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.main__line {
+  width: 100%;
+  max-width: 1296px;
+  margin: 0 auto;
+  background-color: rgba(221, 221, 221, 0.87);
+  height: 2px;
+  margin-bottom: 128px;
+}
+
+.main__projects {
+  max-width: 1186px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 35px;
+  margin: 0 auto;
+}
+
+.main__projects__title {
+  display: flex;
+  flex-direction: row;
+  gap: 714px;
+}
+
+.main__projects__titleGreen {
+  font-size: 35px;
+  font-weight: 600;
+  color: var(--Green100);
+}
+
+.main__projects__titleNight {
+  font-size: 35px;
+  font-weight: 600;
+  color: var(--mainTextColor);
+  display: flex;
+  flex-direction: row;
+  gap: 29px;
+  align-items: first baseline;
+}
+.swiper-container {
+  width: 100%;
+  height: 712px;
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

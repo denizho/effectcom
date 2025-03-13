@@ -1,16 +1,93 @@
-html(lang="ru")
-    head
-        meta(charset="UTF-8")
-        meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        title Эффективные Коммуникации
-        link(rel="stylesheet" href="stylesheets/style.css")
-    body
-        header
-            .header__image
-                .header__container
-                    .header__logo
-                        img(src="images/logo.png")
-                    .header__buttons
-                        button
-                        button 
-                        button 
+extends layout
+
+block content
+    header(style="background-image: url('images/header/header__bg.png');")
+        .header__top
+            .header__logo
+                img(src="images/header/header__logo.png", alt="Логотип")
+            .header__buttons
+                .button.button1
+                    span Написать
+                    img(src="images/header/header__button1.png", alt="Иконка", class="icon")
+                .button.button2
+                    span Проекты
+                    img(src="images/header/header__button2.png", alt="Иконка", class="icon")
+                .button.button3
+                    img(src="images/header/header__button3.png", alt="Иконка", class="icon-small")
+        .header__bottom
+            .header__text
+                |Коммуникации, 
+                |которые приносят результат!
+                |Организуем мероприятия 
+                |от идеи до воплощения
+    main
+        .main__text 
+            p
+                |В «
+                span.highlight Эффективных коммуникациях
+                |» мы верим, что 
+                |каждое мероприятие — это возможность создать 
+                |уникальный опыт, укрепить связи и достичь 
+                |конкретных бизнес-целей. 
+                span.highlight Творческий подход, 
+                |тщательное планирование и внимание к деталям
+                br
+                |- вот ключ к успешному мероприятию.
+            p
+                |Наша 
+                span.highlight команда 
+                |креативных, опытных и 
+                |ориентированных на результат 
+                span.highlight профессионалов  
+                |готова создавать мероприятия, которые не только 
+                |привлекут аудиторию, но и укрепят ваш бренд и 
+                |обеспечат 
+                span.highlight измеримый результат.
+            p
+                |В работе мы используем 
+                span.highlight передовые технологии 
+                |и 
+                |воплощаем 
+                span.highlight комплексные стратегии
+                |, от 
+                |разработки концепции и логистики до 
+                |продвижения и оценки эффективности, чтобы 
+                |гарантировать успех вашего мероприятия.
+        .main__buttons
+            .main__buttons__founded
+                .main__buttons__text
+                    img(src="images/main/main__buttons__play.png", alt="Play", width="42", height="76")
+                    |2014
+                .main__buttons__subtext(style="padding-left: 195px")
+                    |Год основания
+            .main__buttons__projects
+                .main__buttons__text
+                    img(src="images/main/main__buttons__play.png", alt="Play", width="42", height="76")
+                    |300+ 
+                .main__buttons__subtext(style="padding-left: 175px")
+                    |Реализовано проектов
+        .main__line
+        .main__projects
+            .main__projects__title
+                .main__projects__titleGreen
+                    p Проекты
+                .main__projects__titleNight
+                    p Все проекты
+                    img(src="images/main/main__projects__arrow.png", alt="Arrow")
+                .main__projects__video
+                    .swiper-container
+                        .swiper-wrapper
+                            .swiper-slide
+                                iframe(src="https://vk.com/video_ext.php?oid=881021386&id=456239048&hd=2&autoplay=1&js_api=1" width="853" height="480" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" frameborder="0" allowfullscreen)
+                            .swiper-slide
+                                iframe(src="https://vk.com/video_ext.php?oid=881021386&id=456239048&hd=2&autoplay=1&js_api=1" width="853" height="480" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" frameborder="0" allowfullscreen)
+                            .swiper-slide
+                                iframe(src="https://vk.com/video_ext.php?oid=881021386&id=456239048&hd=2&autoplay=1&js_api=1" width="853" height="480" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" frameborder="0" allowfullscreen)
+                            .swiper-slide
+                                iframe(src="https://vk.com/video_ext.php?oid=881021386&id=456239048&hd=2&autoplay=1&js_api=1" width="853" height="480" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" frameborder="0" allowfullscreen)
+                            .swiper-slide
+                                iframe(src="https://vk.com/video_ext.php?oid=881021386&id=456239048&hd=2&autoplay=1&js_api=1" width="853" height="480" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" frameborder="0" allowfullscreen)
+                                button.next-project(style="margin-left: 32px;") Следующий проект
+                .main__projects__video_subtitle
+    script(src="https://vk.com/js/api/videoplayer.js")
+    
