@@ -19,6 +19,9 @@ app.get("/", (req, res) => {
 app.get("/projects", (req, res) => {
   res.render("projects");
 });
+app.get("/admin", (req, res) => {
+  res.render("admin");
+});
 
 app.listen(PORT, () => {
   console.log(`Сервер http://localhost:${PORT}`);
