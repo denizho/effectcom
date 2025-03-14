@@ -13,7 +13,7 @@ block content
                     span Проекты
                     img(src="images/header/header__button2.png", alt="Иконка", class="icon")
                 .button.button3
-                    img(src="images/header/header__button3.png", alt="Иконка", class="icon-small")
+                    img(src="images/header/header__button3.png", alt="Иконка", class="icon-small") 
         .header__bottom
             .header__text
                 |Коммуникации, 
@@ -31,7 +31,7 @@ block content
                 |конкретных бизнес-целей. 
                 span.highlight Творческий подход, 
                 |тщательное планирование и внимание к деталям
-                br
+                
                 |- вот ключ к успешному мероприятию.
             p
                 |Наша 
@@ -67,27 +67,31 @@ block content
                 .main__buttons__subtext(style="padding-left: 175px")
                     |Реализовано проектов
         .main__line
-        .main__projects
-            .main__projects__title
-                .main__projects__titleGreen
-                    p Проекты
-                .main__projects__titleNight
-                    p Все проекты
-                    img(src="images/main/main__projects__arrow.png", alt="Arrow")
-                .main__projects__video
-                    .swiper-container
-                        .swiper-wrapper
-                            .swiper-slide
-                                iframe(src="https://vk.com/video_ext.php?oid=881021386&id=456239048&hd=2&autoplay=1&js_api=1" width="853" height="480" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" frameborder="0" allowfullscreen)
-                            .swiper-slide
-                                iframe(src="https://vk.com/video_ext.php?oid=881021386&id=456239048&hd=2&autoplay=1&js_api=1" width="853" height="480" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" frameborder="0" allowfullscreen)
-                            .swiper-slide
-                                iframe(src="https://vk.com/video_ext.php?oid=881021386&id=456239048&hd=2&autoplay=1&js_api=1" width="853" height="480" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" frameborder="0" allowfullscreen)
-                            .swiper-slide
-                                iframe(src="https://vk.com/video_ext.php?oid=881021386&id=456239048&hd=2&autoplay=1&js_api=1" width="853" height="480" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" frameborder="0" allowfullscreen)
-                            .swiper-slide
-                                iframe(src="https://vk.com/video_ext.php?oid=881021386&id=456239048&hd=2&autoplay=1&js_api=1" width="853" height="480" allow="autoplay; encrypted-media; fullscreen; picture-in-picture; screen-wake-lock;" frameborder="0" allowfullscreen)
-                                button.next-project(style="margin-left: 32px;") Следующий проект
-                .main__projects__video_subtitle
-    script(src="https://vk.com/js/api/videoplayer.js")
-    
+        .outer-container
+            .main__container
+                .main__projects
+                    .main__projects__title
+                        .main__projects__titleGreen
+                            p Проекты
+                        .main__projects__titleNight
+                            p Все проекты
+                            img(src="images/main/main__projects__arrow.png", alt="Arrow")
+                    .main__projects__video
+                    .main__projects__video__subtitle
+                        p SubTitle
+                .main__projects__nextel 
+                    p Следующий 
+                    |проект
+    footer
+        .footer__content
+            .footer__logo 
+                img(src="images/footer/footer__logo.png")
+            .footer__data 
+                p 2014-2025 © ООО «ЭффектКомм». ИНН 7716792536
+        .footer__contact
+            .footer__tel
+                img(src="images/footer/footer__tel.png")
+                p +7(495) 226-31-26 
+            .footer__email
+                img(src="images/footer/footer__email.png")
+                p info@effectcomm.ru

@@ -1,6 +1,12 @@
 :root {
-  --Green100: #94d400;
+  --Green100D: #94d400;
+  --Green100: #bbff00;
+  --Green100DP: #85bb07;
   --Blue100: #70c0f7;
+  --Blue: #9bd3f9;
+  --BlueP: #4fa3dd;
+  --GrayH: #63696a;
+  --GrayP: #090909;
   --Night: #0e4266;
   --buttonWidth: 172px;
   --buttonHeight: 44px;
@@ -22,19 +28,16 @@
   --mainTextColor: #20282a;
   --whiteColor: white;
 }
-
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
 }
-
 header {
   height: 994px;
   width: 100%;
   background-size: cover;
   background-position: center;
 }
-
 .header__top {
   display: flex;
   max-width: 1302px;
@@ -46,17 +49,14 @@ header {
   align-items: center;
   font-family: "Montserrat", sans-serif;
 }
-
 .header__logo {
   width: var(--logoWidth);
   height: var(--logoHeight);
 }
-
 .header__logo img {
   width: 100%;
   height: 100%;
 }
-
 .header__buttons {
   display: flex;
   flex-direction: row;
@@ -64,7 +64,6 @@ header {
   gap: 13px;
   color: var(--whiteColor);
 }
-
 .button {
   display: flex;
   align-items: center;
@@ -75,16 +74,15 @@ header {
   height: var(--buttonHeight);
   border-radius: var(--buttonRadius);
   font-weight: var(--buttonFontWeight);
+  user-select: none;
+  transition: 0.5s;
 }
-
 .button1 {
-  background-color: var(--Green100);
+  background-color: var(--Green100D);
 }
-
 .button2 {
   background-color: var(--Blue100);
 }
-
 .button3 {
   background-color: var(--Night);
   width: var(--buttonThemeSize);
@@ -94,24 +92,20 @@ header {
   justify-content: center;
   align-items: center;
 }
-
 .icon {
   margin-left: 8px;
   width: 24px;
   height: 24px;
 }
-
 .icon-small {
   width: 28px;
   height: 28px;
 }
-
 .header__bottom {
   max-width: 1296px;
   width: 100%;
   margin: 0 auto;
 }
-
 .header__text {
   margin-top: var(--containerBottomMargin);
   width: var(--containerBottomWidth);
@@ -121,7 +115,6 @@ header {
   color: var(--whiteColor);
   white-space: pre;
 }
-
 .main__text {
   padding-top: 224px;
   max-width: 1302px;
@@ -131,20 +124,16 @@ header {
   font-weight: var(--mainTextWeight);
   color: var(--mainTextColor);
 }
-
 .main__text p {
   margin-bottom: 1em;
   margin-top: 0;
 }
-
 .main__text p:last-child {
   margin-bottom: 0;
 }
-
 .highlight {
-  color: var(--Green100);
+  color: var(--Green100D);
 }
-
 .main__buttons {
   padding-top: 128px;
   padding-bottom: 85px;
@@ -155,7 +144,6 @@ header {
   flex-direction: row;
   gap: 48px;
 }
-
 .main__buttons__founded,
 .main__buttons__projects {
   width: 624px;
@@ -166,13 +154,11 @@ header {
   flex-direction: column;
   justify-content: center;
 }
-
 .main__buttons__founded img,
 .main__buttons__projects img {
   width: 42px;
   height: 76px;
 }
-
 .main__buttons__text {
   font-size: 140px;
   font-weight: 700;
@@ -184,7 +170,6 @@ header {
   justify-content: center;
   line-height: 1;
 }
-
 .main__buttons__subtext {
   font-size: 24px;
   font-weight: 500;
@@ -193,7 +178,6 @@ header {
   align-items: flex-start;
   justify-content: flex-start;
 }
-
 .main__line {
   width: 100%;
   max-width: 1296px;
@@ -202,29 +186,44 @@ header {
   height: 2px;
   margin-bottom: 128px;
 }
-
+.outer-container {
+  display: flex;
+  justify-content: center;
+  padding-left: 70px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.main__container {
+  display: flex;
+  flex-direction: row;
+  gap: 32px;
+  align-items: flex-start;
+  margin-bottom: 128px;
+  max-width: 1365px;
+  width: 100%;
+  box-sizing: border-box;
+}
 .main__projects {
   max-width: 1186px;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 35px;
-  margin: 0 auto;
+  gap: 32px;
 }
-
 .main__projects__title {
   display: flex;
   flex-direction: row;
   gap: 714px;
 }
-
+.main__projects__title p {
+  margin: 0;
+}
 .main__projects__titleGreen {
   font-size: 35px;
   font-weight: 600;
-  color: var(--Green100);
+  color: var(--Green100D);
 }
-
 .main__projects__titleNight {
   font-size: 35px;
   font-weight: 600;
@@ -234,15 +233,110 @@ header {
   gap: 29px;
   align-items: first baseline;
 }
-.swiper-container {
-  width: 100%;
+.main__projects__video {
   height: 712px;
   border-radius: 32px;
-  overflow: hidden;
+  border: 1px solid black;
+  background-color: black;
 }
-
-.swiper-slide {
+.main__projects__nextel {
+  margin-top: 93px;
+  color: rgba(32, 40, 42, 0.3);
+  font-size: 23px;
+  font-weight: 700;
+}
+.main__projects__nextel p {
+  margin: 0;
+}
+.main__projects__video__subtitle {
+  font-size: 48px;
+  color: var(--mainTextColor);
+  font-weight: 600;
+}
+.main__projects__video__subtitle p {
+  margin: 0;
+}
+footer {
   display: flex;
-  justify-content: center;
+  flex-direction: row;
+  gap: 445px;
   align-items: center;
+  justify-content: space-between;
+  border-top: 2px solid #474b4c;
+  padding: 69px 308px 59px 303px;
+}
+.footer__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 14px;
+}
+.footer__contact {
+  gap: 56px;
+}
+.footer__contact,
+.footer__tel,
+.footer__email {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.footer__tel,
+.footer__email {
+  gap: 12px;
+}
+.footer__tel img,
+.footer__email img {
+  width: 28px;
+  height: 28px;
+}
+body.dark {
+  background-color: var(--mainTextColor);
+}
+.main__text.dark {
+  color: var(--whiteColor);
+}
+.main__buttons__founded.dark,
+.main__buttons__projects.dark {
+  border: 3px solid var(--Green100);
+}
+.main__buttons__text.dark {
+  color: var(--Green100);
+}
+.dark {
+  color: var(--whiteColor);
+}
+.main__buttons__subtext.dark {
+  color: var(--whiteColor);
+}
+.main__projects__titleNight.dark {
+  color: var(--whiteColor);
+}
+.main__projects__nextel.dark {
+  color: #dddddd;
+}
+.main__projects__video__subtitle.dark {
+  color: var(--whiteColor);
+}
+footer.dark {
+  background-color: #151919;
+  color: var(--whiteColor);
+}
+.button3.dark {
+  background-color: white;
+}
+.button.button1.hover {
+  background-color: var(--Green100);
+}
+.button.button2.hover {
+  background-color: var(--Blue);
+}
+.button.button3.hover {
+  background-color: #d8f0fe;
+}
+.button.button1.pressed {
+  background-color: var(--Green100DP);
+}
+.button.button2.pressed {
+  background-color: var(--BlueP);
 }
