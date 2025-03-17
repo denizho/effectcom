@@ -16,12 +16,17 @@ block content
                     img(src="images/header/header__button3.png", alt="Иконка", class="icon-small") 
         .header__bottom
             .header__text
-                |Коммуникации, 
-                |которые приносят результат!
-                |Организуем мероприятия 
-                |от идеи до воплощения
+                p
+                    |Коммуникации,
+                    br 
+                    |которые приносят результат!
+                    |Организуем мероприятия 
+                    br 
+                    |от идеи до воплощения
     main
         .main__text 
+            .main__text__title 
+                p О компании
             p
                 |В «
                 span.highlight Эффективных коммуникациях
@@ -67,7 +72,7 @@ block content
                 .main__buttons__subtext(style="padding-left: 175px")
                     |Реализовано проектов
         .main__line
-        .outer-container
+        .outer-container.desktop
             .main__container
                 .main__projects
                     .main__projects__title
@@ -82,16 +87,29 @@ block content
                 .main__projects__nextel 
                     p Следующий 
                     |проект
+        .main__projects.mobile
+            .main__projects__title
+                .main__projects__titleGreen
+                    p Проекты
+            .main__projects__video
+            .main__projects__video__subtitle
+                p SubTitle
+            .main__projects__next
+                img(src="images/main/main__projects__arrowMobile.png")
+                p Следующий проект
+            .main__projects__button
+                button Все проекты
     footer
-        .footer__content
-            .footer__logo 
-                img(src="images/footer/footer__logo.png")
-            .footer__data 
-                p 2014-2025 © ООО «ЭффектКомм». ИНН 7716792536
-        .footer__contact
-            .footer__tel
-                img(src="images/footer/footer__tel.png")
-                p +7(495) 226-31-26 
-            .footer__email
-                img(src="images/footer/footer__email.png")
-                p info@effectcomm.ru
+        .footer__container
+            .footer__content
+                .footer__logo 
+                    img(src="images/footer/footer__logo.png")
+                .footer__data 
+                    p 2014-2025 © ООО «ЭффектКомм». ИНН 7716792536
+            .footer__contact
+                .footer__tel
+                    img(src="images/footer/footer__tel.png")
+                    p +7(495) 226-31-26 
+                .footer__email
+                    img(src="images/footer/footer__email.png")
+                    p info@effectcomm.ru
