@@ -1,19 +1,20 @@
 extends layout
 
 block content
-    header(style="background-image: url('images/header/header__bg.png');")
+
+    header(style="background-image: url('images/header/header__bg.png');").index
         .header__top
             .header__logo
-                img(src="images/header/header__logo.png", alt="Логотип")
+                img(src="images/header/header__logo.svg", alt="Логотип")
             .header__buttons
                 .button.button1
                     span Написать
-                    img(src="images/header/header__button1.png", alt="Иконка", class="icon")
-                .button.button2
+                    img(src="images/header/header__button1.svg", alt="Иконка", class="icon")
+                a.button.button2(href="/projects")
                     span Проекты
-                    img(src="images/header/header__button2.png", alt="Иконка", class="icon")
+                    img(src="images/header/header__button2.svg", alt="Иконка", class="icon")
                 .button.button3
-                    img(src="images/header/header__button3.png", alt="Иконка", class="icon-small") 
+                    img(src="images/header/header__button3.svg", alt="Иконка", class="icon-small") 
         .header__bottom
             .header__text
                 p
@@ -61,13 +62,13 @@ block content
         .main__buttons
             .main__buttons__founded
                 .main__buttons__text
-                    img(src="images/main/main__buttons__play.png", alt="Play", width="42", height="76")
+                    img(src="images/main/main__buttons__play.svg", alt="Play", width="42", height="76")
                     |2014
                 .main__buttons__subtext(style="padding-left: 195px")
                     |Год основания
             .main__buttons__projects
                 .main__buttons__text
-                    img(src="images/main/main__buttons__play.png", alt="Play", width="42", height="76")
+                    img(src="images/main/main__buttons__play.svg", alt="Play", width="42", height="76")
                     |300+ 
                 .main__buttons__subtext(style="padding-left: 175px")
                     |Реализовано проектов
@@ -80,7 +81,7 @@ block content
                             p Проекты
                         .main__projects__titleNight
                             p Все проекты
-                            img(src="images/main/main__projects__arrow.png", alt="Arrow")
+                            img(src="images/main/main__projects__arrow.svg", alt="Arrow")
                     .main__projects__video
                     .main__projects__video__subtitle
                         p SubTitle
@@ -95,7 +96,7 @@ block content
             .main__projects__video__subtitle
                 p SubTitle
             .main__projects__next
-                img(src="images/main/main__projects__arrowMobile.png")
+                img(src="images/main/main__projects__arrowMobile.svg")
                 p Следующий проект
             .main__projects__button
                 button Все проекты
@@ -103,13 +104,14 @@ block content
         .footer__container
             .footer__content
                 .footer__logo 
-                    img(src="images/footer/footer__logo.png")
+                    img(src="images/footer/footer__logo.svg")
                 .footer__data 
                     p 2014-2025 © ООО «ЭффектКомм». ИНН 7716792536
             .footer__contact
                 .footer__tel
-                    img(src="images/footer/footer__tel.png")
+                    img(src="images/footer/footer__tel.svg")
                     p +7(495) 226-31-26 
                 .footer__email
-                    img(src="images/footer/footer__email.png")
+                    img(src="images/footer/footer__email.svg")
                     p info@effectcomm.ru
+    script(src="javascripts/utils.js")

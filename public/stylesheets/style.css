@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
 :root {
   --Green100D: #94d400;
   --Green100: #bbff00;
@@ -50,7 +56,7 @@ header {
 
 .header__top {
   display: flex;
-  max-width: 1302px;
+  max-width: 1296px;
   width: 100%;
   margin: 0 auto;
   padding-top: var(--containerTopPadding);
@@ -115,7 +121,7 @@ header {
 }
 
 .button1 .icon {
-  height: 15px;
+  height: 24px;
 }
 
 .icon-small {
@@ -394,6 +400,7 @@ body.dark {
 footer.dark {
   background-color: #151919;
   color: var(--whiteColor);
+  box-shadow: 0 0 5px #474b4c;
 }
 
 .button3.dark {
@@ -471,6 +478,8 @@ footer.dark {
   cursor: pointer;
   font-size: 24px;
   margin-bottom: 8px;
+  width: 40px;
+  height: 40px;
 }
 
 .popup__header {
@@ -559,7 +568,7 @@ textarea.error {
   border-radius: 50%;
   border: none;
   background-color: var(--Green100D);
-  background-image: url("/images/header/header__popupFile.png");
+  background-image: url("/images/header/header__popupFile.svg");
   background-size: 40px 40px;
   background-position: center;
   background-repeat: no-repeat;
@@ -575,6 +584,126 @@ textarea.error {
 
 .mobile {
   display: none;
+}
+
+header.project {
+  height: 110px;
+}
+
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  margin: 0 auto;
+  max-width: 1296px;
+  width: 100%;
+}
+
+.projects__title p {
+  margin-top: 72px;
+  font-size: 85px;
+  font-weight: 500;
+}
+
+.projects__videos {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+  margin-bottom: 129px;
+}
+
+.project__video {
+  position: relative;
+  width: 1296px;
+  height: 638px;
+  background-color: gainsboro;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 32px;
+  overflow: hidden;
+}
+
+.project__video__content {
+  max-width: 1184px;
+  width: 100%;
+  height: 575px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.project__fullname {
+  font-size: 24px;
+  margin-bottom: 408px;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.1s;
+  text-shadow: 0px 5px 4px rgba(0, 0, 0, 0.35);
+}
+
+.project__video__title h2 {
+  font-size: 60px;
+  color: white;
+  font-weight: 500;
+  margin-bottom: 0px;
+  text-shadow: 0px 5px 4px rgba(0, 0, 0, 0.35);
+}
+
+.project__video__subtitle h3 {
+  font-size: 32px;
+  font-weight: 500;
+  text-shadow: 0px 5px 4px rgba(0, 0, 0, 0.35);
+  color: white;
+}
+
+.project__details {
+  display: flex;
+  flex-direction: row;
+  gap: 161px;
+}
+
+.project__titles {
+  display: flex;
+  flex-direction: column;
+}
+
+.button__play {
+  background-image: url("/images/main/projects__buttonplay.svg");
+  background-size: cover;
+  width: 76px;
+  height: 76px;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 1);
+  transition: opacity 0.1s;
+  opacity: 1;
+}
+
+.project__video:hover .overlay {
+  opacity: 0;
+}
+
+.project__button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  opacity: 0; /* Изначально скрыто */
+  transition: opacity 0.3s; /* Плавный переход */
+}
+
+.project__video:hover .project__fullname {
+  opacity: 1; /* Показываем название проекта при наведении */
+}
+
+.project__video:hover .project__button {
+  opacity: 1; /* Показываем кнопку при наведении */
 }
 @media (max-width: 850px) {
   .mobile {
@@ -823,5 +952,164 @@ textarea.error {
   .footer__logo img {
     width: 140px;
     height: 24px;
+  }
+  .popup {
+    background-color: var(--whiteColor);
+  }
+
+  .popup-content {
+    width: 343px;
+    height: 575px;
+    padding: 0px 0px;
+    border-radius: 0px;
+    background-color: var(--whiteColor);
+  }
+
+  .close {
+    margin-bottom: 32px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .popup__header {
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+
+  .popup__header h2 {
+    font-size: 28px;
+    font-weight: 500;
+  }
+
+  .popup__header__subtitle {
+    max-width: 300px;
+    width: 100%;
+    word-break: normal;
+  }
+
+  .popup__header p {
+    font-size: 16px;
+  }
+
+  .popup__inputs {
+    gap: 16px;
+  }
+
+  .popup__file,
+  .popup__button {
+    display: flex;
+    align-items: center;
+  }
+
+  .popup__file {
+    gap: 0px;
+    color: rgba(var(--mainTextColor-rgb), 0);
+  }
+
+  .popup__submit {
+    display: flex;
+    justify-content: space-between;
+    gap: 90px;
+  }
+
+  .popup__button button {
+    padding: 12px 54px;
+  }
+
+  input,
+  textarea {
+    width: 343px;
+    padding: 12px 16px;
+    font-size: 16px;
+  }
+
+  textarea {
+    height: 115px;
+  }
+
+  .file-button {
+    width: 48px;
+    height: 48px;
+
+    background-size: 28px 28px;
+  }
+  header.project {
+    height: 92px;
+  }
+
+  .projects {
+    gap: 24px;
+    max-width: 343px;
+  }
+
+  .projects__title p {
+    margin-top: 17px;
+    font-size: 32px;
+  }
+
+  .projects__videos {
+    gap: 24px;
+    margin-bottom: 56px;
+  }
+
+  .project__video {
+    width: 343px;
+    height: 240px;
+    border-radius: 16px;
+    align-items: flex-end;
+  }
+
+  .project__video__content {
+    max-width: 327px;
+    width: 100%;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+  }
+
+  .project__fullname {
+    display: none;
+  }
+
+  .project__video__title h2 {
+    font-size: 18px;
+  }
+
+  .project__video__subtitle h3 {
+    font-size: 12px;
+  }
+
+  .project__details {
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .overlay {
+    display: none;
+  }
+
+  .project__button {
+    display: flex;
+    position: static;
+    justify-content: flex-start;
+    align-items: flex-start;
+    opacity: 1;
+  }
+  .button__play {
+    background-image: url("/images/main/projects__buttonplaymob.svg");
+    background-size: cover;
+    width: 28px;
+    height: 28px;
+  }
+
+  .project__video:hover .project__fullname {
+    opacity: 1; /* Показываем название проекта при наведении */
+  }
+
+  .project__video:hover .project__button {
+    opacity: 1; /* Показываем кнопку при наведении */
   }
 }

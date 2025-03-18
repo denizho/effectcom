@@ -4,71 +4,26 @@ const body = document.body;
 
 function updateTheme(isDark) {
   body.classList.toggle("dark", isDark);
-  document.querySelector(".main__buttons").classList.toggle("dark", isDark);
-  document
-    .querySelector(".main__projects__titleNight")
-    .classList.toggle("dark", isDark);
-  document
-    .querySelector(".main__projects__nextel")
-    .classList.toggle("dark", isDark);
-  document
-    .querySelector(".main__projects__video__subtitle p")
-    .classList.toggle("dark", isDark);
-  document.querySelector("footer").classList.toggle("dark", isDark);
-
-  const mainText = document.querySelector(".main__text");
-  const mainButtonsText = document.querySelectorAll(".main__buttons__text");
-  const mainButtonsSubtext = document.querySelectorAll(
-    ".main__buttons__subtext"
-  );
 
   if (isDark) {
-    mainText.classList.add("dark");
-    mainButtonsText.forEach((text) => text.classList.add("dark"));
-    mainButtonsSubtext.forEach((subtext) => subtext.classList.add("dark"));
-
     button3Image.src = "images/header/header__button3dark.svg";
     button3.classList.add("dark");
 
-    const projectTitleImage = document.querySelector(
-      ".main__projects__titleNight img"
-    );
-    const footerLogoImage = document.querySelector(".footer__logo img");
-    projectTitleImage.src = "images/main/main__projects__dark__arrow.svg";
+    const footerLogoImage = document.querySelector(".footer__logo.prj img");
+    const headerLogoImage = document.querySelector(".header__logo.prj img");
     footerLogoImage.src = "images/header/header__logo.svg";
-
-    const buttonImages = document.querySelectorAll(".main__buttons__text img");
-    buttonImages.forEach((img) => {
-      img.src = img.src.replace(
-        "main__buttons__play.svg",
-        "main__buttons__darkplay.svg"
-      );
-    });
+    headerLogoImage.src = "images/header/header__logo.svg";
+    document.querySelector("footer").classList.add("dark");
   } else {
-    mainText.classList.remove("dark");
-    mainButtonsText.forEach((text) => text.classList.remove("dark"));
-    mainButtonsSubtext.forEach((subtext) => subtext.classList.remove("dark"));
-
     button3Image.src = "images/header/header__button3.svg";
     button3.classList.remove("dark");
+    document.querySelector("footer").classList.remove("dark");
+
     const footerLogoImage = document.querySelector(".footer__logo img");
+    const headerLogoImage = document.querySelector(".header__logo.prj img");
     footerLogoImage.src = "images/footer/footer__logo.svg";
-
-    const buttonImages = document.querySelectorAll(".main__buttons__text img");
-    buttonImages.forEach((img) => {
-      img.src = img.src.replace(
-        "main__buttons__darkplay.svg",
-        "main__buttons__play.svg"
-      );
-    });
+    headerLogoImage.src = "images/footer/footer__logo.svg";
   }
-
-  const buttonsToChange = document.querySelectorAll(
-    ".main__buttons__founded, .main__buttons__projects"
-  );
-  buttonsToChange.forEach((button) => {
-    button.classList.toggle("dark", isDark);
-  });
 }
 
 const isDarkTheme = localStorage.getItem("darkTheme") === "true";
@@ -79,7 +34,6 @@ button3.addEventListener("click", () => {
   updateTheme(isDark);
   localStorage.setItem("darkTheme", isDark);
 });
-
 const openButton = document.querySelector(".button.button1");
 
 openButton.addEventListener("click", function () {

@@ -1,0 +1,77 @@
+extends layout
+
+block content
+    header.project
+        .header__top
+            .header__logo.prj
+                a(href="/")
+                    img(src="images/footer/footer__logo.svg", alt="Логотип")
+            .header__buttons
+                .button.button1
+                    span Написать
+                    img(src="images/header/header__button1.svg", alt="Иконка", class="icon")
+                a.button.button2(href="/projects")
+                    span Проекты
+                    img(src="images/header/header__button2.svg", alt="Иконка", class="icon")
+                .button.button3
+                    img(src="images/header/header__button3.svg", alt="Иконка", class="icon-small") 
+    main
+        .projects
+            .projects__title
+                p Проекты
+            .projects__videos 
+                .project__video
+                    .overlay
+                    .project__video__content
+                        .project__fullname
+                            p Полное название и описание
+                        .project__details
+                            .project__titles
+                                .project__video__title
+                                    h2 Финансовый конгресс
+                                .project__video__subtitle
+                                    h3 Санкт-Петербург, 2024
+                            .project__button
+                                .button__play   
+                .project__video
+                    .overlay
+                    .project__video__content
+                        .project__fullname
+                            p Полное название и описание
+                        .project__details
+                            .project__titles
+                                .project__video__title
+                                    h2 Финансовый конгресс
+                                .project__video__subtitle
+                                    h3 Санкт-Петербург, 2024
+                            .project__button
+                                .button__play                 
+                .project__video
+                    .overlay
+                    .project__video__content
+                        .project__fullname
+                            p Полное название и описание
+                        .project__details
+                            .project__titles
+                                .project__video__title
+                                    h2 Финансовый конгресс
+                                .project__video__subtitle
+                                    h3 Санкт-Петербург, 2024
+                            .project__button
+                                .button__play   
+
+    footer
+        .footer__container
+            .footer__content
+                .footer__logo.prj
+                    img(src="images/footer/footer__logo.svg")
+                .footer__data 
+                    p 2014-2025 © ООО «ЭффектКомм». ИНН 7716792536
+            .footer__contact
+                .footer__tel
+                    img(src="images/footer/footer__tel.svg")
+                    p +7(495) 226-31-26 
+                .footer__email
+                    img(src="images/footer/footer__email.svg")
+                    p info@effectcomm.ru
+    script(src="javascripts/projects.js")
