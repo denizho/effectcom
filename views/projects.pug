@@ -19,7 +19,7 @@
                                 .projectBox
                                     .projectBWr
                                         if proj.isVideo==1
-                                            video(src=proj.video muted autoplay loop)
+                                            video(src=proj.video playsinline muted autoplay loop)
                                         else
                                             img(src=proj.img)
                                 .projectTitle #{proj.title}

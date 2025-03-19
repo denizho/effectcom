@@ -92,7 +92,7 @@ block content
                             .projectBWr(v-if="item.isVideo==0")
                                 img(:src="item.img")
                             .projectBWr(v-if="item.isVideo==1")
-                                video(:src="item.video" muted autoplay loop)
+                                video(:src="item.video" playsinline muted autoplay loop)
                             .projectAtitle
                                 .projectAtitleText {{item.title}}
 

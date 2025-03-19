@@ -12,7 +12,7 @@ block content
                         .projectBox
                             .projectBWr
                                 if proj.isVideo == 1
-                                    video(src=proj.video muted loop)
+                                    video(src=proj.video muted loop playsinline)
                                 else
                                     img(src=proj.img)
                             .projTitle
