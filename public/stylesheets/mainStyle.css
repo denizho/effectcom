@@ -11,6 +11,9 @@ body{
     background: var(--Dark-100, #20282A);
     font-family: "Montserrat", sans-serif;
 }
+.logo{
+    cursor: pointer;
+}
 .whiteBg{
      background: #FFF;
     color: #20282A;
