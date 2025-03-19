@@ -34,8 +34,16 @@ app.set("views", path.join(__dirname, "views"));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/", (req, res) => {
-  res.render("index");
+app.get("/", async (req, res) => {
+    try {
+        let projects = await db("projects").where({isDeleted: 0, isEnable: 1}).orderBy("sort")
+
+        res.render("start", {projects});
+    }
+    catch (e) {
+        console.warn(e)
+        res.sendStatus(500)
+    }
 });
 
 
