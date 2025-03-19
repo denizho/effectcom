@@ -144,8 +144,26 @@ a{
     height: 100vh;
     object-fit: cover;
 }
+.firstFilter {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: #00000063;
+}
 .first{
     position: relative;
+}
+.firstFilter{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    background: green;
 }
 .firstTextBox{
     position: absolute;
