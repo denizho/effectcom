@@ -47,10 +47,11 @@ body{
 .header  svg path{
     transition: fill 1s;
 }
-.whiteBg .header.bg .logo svg path:not(.point){
+.whiteBg .header.bg .logo svg path:not(.point), .whiteBg .mustWhite .logo svg path:not(.point) {
     fill:#20282A;
 }
-.whiteBg .header.bg  .haederAddressBoxItem svg path {
+
+.whiteBg .header.bg  .haederAddressBoxItem svg path , .whiteBg .mustWhite .haederAddressBoxItem svg path{
     fill:#20282A;
 }
 .headerContent{
@@ -80,7 +81,7 @@ body{
     text-decoration: none;
 
 }
-.whiteBg .bg .haederAddressBoxItem{
+.whiteBg .bg .haederAddressBoxItem, .whiteBg .mustWhite .haederAddressBoxItem{
     color: #20282A;
 }
 .headerSocialBox{
@@ -89,11 +90,17 @@ body{
     justify-content: center;
     gap: 20px;
 }
+a{
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
 .btn{
     padding: 9px 24px;
     cursor: pointer;
     width: max-content;
     border-radius: 24px;
+    user-select: none;
 }
 .btnContent{
     display: flex;
@@ -154,7 +161,7 @@ body{
 }
 h1 {
     font-family: "Poppins", sans-serif;
-    font-size: 68px;
+    font-size: 62px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
@@ -164,7 +171,7 @@ h1 {
 }
 .second{
     width: 75%;
-    margin: 128px auto;
+    margin: 62px auto;
 }
 .secondTitle{
     font-family: "Poppins", sans-serif;
@@ -174,7 +181,7 @@ h1 {
     line-height: normal;
 }
 .secondText{
-    margin-top: 36px;
+    margin-top: 20px;
     font-family: "Poppins", sans-serif;
     font-size: 36px;
     font-style: normal;
@@ -183,7 +190,7 @@ h1 {
 
 }
 .secondRow{
-    margin-top: 123px;
+    margin-top: 64px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -191,7 +198,7 @@ h1 {
 .secondRowItem{
     border-radius: 160px;
     border: 3px solid var(--Green-dark-100, #94D400);
-    padding: 48px 84px;
+    padding: 24px 84px;
     padding-bottom: 16px;
 }
 .secondRowItemHeader{
@@ -205,7 +212,7 @@ h1 {
 .secondRowItemText{
     color: var(--Green-dark-100, #94D400);
     font-family: "Poppins", sans-serif;
-    font-size: 140px;
+    font-size: 98px;
     font-style: normal;
     font-weight: 700;
     line-height: 1;
@@ -214,7 +221,7 @@ h1 {
     color: #FFF;
 
     font-family: "Poppins", sans-serif;
-    font-size: 24px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -226,7 +233,7 @@ h1 {
     margin-bottom: 37px;
 }
 .secondLine{
-    margin-top: 123px;
+    margin-top: 64px;
     width: 100%;
     height: 2px;
     background-color:  rgba(221, 221, 221, 0.87);
@@ -234,7 +241,7 @@ h1 {
 .projects{
     width: 75%;
     margin: auto;
-    margin-bottom: 128px;
+    margin-bottom: 64px;
 }
 .projectsTitleBox{
     display: flex;
@@ -281,6 +288,7 @@ h1 {
 }
 .projectsWr{
     margin-top:32px;
+    overflow-x: scroll;
 }
 .projectBox{
     position: relative;
@@ -294,20 +302,53 @@ h1 {
     width: 100%;
     height: 100%;
 }
-.projectContainer{
-    width: 1100px;
+.projectContent{
+    width: 850px;
 }
+
+.projectContainer {
+    width: max-content;
+}
+.project{
+    display: inline-block;
+    transition: opacity 1s;
+}
+.noVisible{
+    opacity: 0;
+}
+.hidden{
+    display: none !important;
+}
+.projectGroup{
+    display: grid;
+    grid-template-columns: 1fr 300px;
+}
+.projectNext{
+    font-size: 16px;
+    padding: 16px;
+}
+.projectNextBtn{
+    cursor: pointer;
+    user-select: none;
+}
+
 .projectBWr video{
     width: 100%;
     border-radius: 32px;
 }
+.projectBWr img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 32px;
+}
 .projectTitle {
     font-family: "Poppins", sans-serif;
-    font-size: 48px;
+    font-size: 24px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    margin-top:32px;
+    margin-top: 16px;
 }
 .footer{
     background: #151919;
@@ -361,4 +402,126 @@ h1 {
 }
 .scroolSpy.visible {
     opacity: 1;
+}
+.projWr{
+    margin: 128px auto;
+    width: 75%;
+}
+.proj{
+    margin-bottom: 64px;
+    cursor: pointer;
+}
+.projTitle{
+    font-family: "Poppins", sans-serif;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 64px;
+    font-size: 28px;
+    background: linear-gradient(to bottom, #00000000, #000000FF);
+    text-shadow: 0px 5px 4px rgba(0, 0, 0, 0.35);
+    border-radius:  0 0 32px 32px;
+    color: white;
+}
+.projTitleDescr{
+    text-shadow: 0px 5px 4px rgba(0, 0, 0, 0.35);
+
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+}
+.fsDiv{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 5000;
+    backdrop-filter: blur(16px);
+}
+.closeWr{
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    padding: 16px 32px;
+}
+.closeWrIco{
+    cursor: pointer;
+}
+.whiteBg .closeWrIco svg path{
+    stroke: #0e4266;
+}
+.popup{
+    width: 80%;
+    max-width: 1200px;
+}
+.feedBackForm{
+    background: #fff;
+    color: #20282A;
+    border-radius: 32px;
+    font-family: "Poppins", sans-serif;
+    box-shadow: 0 0 2px 0 #21282b;
+}
+.feedBackForm .closeWrIco svg path{
+    stroke: #20282A;
+}
+.feedBackFormBoby{
+    padding: 0 64px;
+}
+.feedBackFormHead{
+    font-size: 47px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.feedBackFormDescr{
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.feedBackFormRow{
+    margin-top: 32px;
+}
+input:active,input:focus, textarea:active, textarea:focus{
+    outline: none !important;
+}
+.feedBackFormRow input, .feedBackFormRow textarea{
+    border: none;
+    background:  rgba(32, 40, 42, 0.05);
+    padding: 16px;
+    box-sizing: border-box;
+    width: 100%;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 26px;
+}
+.feedBackBtn{
+    padding: 16px 32px;
+     background: #20282A;
+
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border-radius: 42px;
+    cursor: pointer;
+    color: #fff;
+    width: max-content;
+}
+.feedBackBtn:hover{
+    background: #63696A;
+}
+.feedBackBtnWr{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.grecaptcha-badge{
+    display:none;
 }

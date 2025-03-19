@@ -1,20 +1,42 @@
 extends newLayout
 
 block content
-    include header
+    .mustWhite
+        include header
     .fsTower
-        include first
-    .fsTower
-        include second
-    .fsTower
-        include projects
+        .projWr
+            h1 Проекты
+            .projBox
+                each proj in projects
+                    .proj.scroolSpy(onclick="openProj("+proj.id+")")
+                        .projectBox
+                            .projectBWr
+                                if proj.isVideo == 1
+                                    video(src=proj.video muted loop)
+                                else
+                                    img(src=proj.img)
+                            .projTitle
+                                .projTitleText #{proj.title}
+                                .projTitleDescr #{proj.descr}
 
     include footer
 
     script.
+        async function openProj(id){
+            let r=await fetch("/project/"+id);
+            let div=document.createElement("div")
+            div.classList.add("fsDiv");
+            div.innerHTML=await r.text()
+            document.querySelectorAll("video").forEach(d => {
+                d.pause()
+            })
+            document.body.appendChild(div)
+            document.body.style.overflow="hidden"
+
+        }
         window.onscroll=(e)=>{
 
-            if(window.scrollY>133)
+            if(window.scrollY>36)
                 header.classList.add("bg")
             else
                 header.classList.remove("bg")
@@ -37,8 +59,12 @@ block content
         let observer = new IntersectionObserver(handleIntersect, options);
         function handleIntersect(entries, observer) {
             entries.forEach(e=>{
-                if(e.isIntersecting)
+                if(e.isIntersecting) {
                     e.target.classList.add("visible")
+                    let video=e.target.querySelector("video")
+                    if(video)
+                        video.play()
+                        }
             })
             console.log(entries)
 

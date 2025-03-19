@@ -3,10 +3,65 @@ html(lang="ru")
         meta(charset="UTF-8")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
         title Эффекткомм
+        <meta name="description" content="Организуем мероприятия от идеи до воплощения" />
+        <meta name="keywords" content="Организация мероприятий" />
+        <meta property="og:title" content="Организуем мероприятия от идеи до воплощения"/>
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content="https://effectocmm.ru" />
+        <meta property="og:image" content="https://effectocmm.ru/og_image.jpg"/>
+        <meta property="og:site_name" content="Эффективные коммуникации"/>
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+        <script src="https://www.google.com/recaptcha/api.js?render=6LcQafkqAAAAAKNERbaoG1KfKbrNXsJSmeUJU3sN"></script>
         link(href="/stylesheets/mainStyle.css" rel="stylesheet")
         block head
     body
         block content
+        script.
+
+            function closePopups() {
+                document.body.style.overflow = null;
+                document.querySelectorAll(".fsDiv").forEach(d => {
+                    d.parentNode.removeChild(d)
+                    })
+                document.querySelectorAll("video").forEach(d => {
+                    d.play()
+                    })
+            }
+            async function feedback(){
+                let r = await fetch("/feedBackForm/");
+                let div = document.createElement("div")
+                div.classList.add("fsDiv");
+                div.innerHTML = await r.text()
+                document.querySelectorAll("video").forEach(d => {
+                    d.pause()
+                    })
+                document.body.appendChild(div)
+                document.body.style.overflow = "hidden"
+            }
+            async function sendFeedback(){
+                let dt={};
+                document.querySelectorAll(".fbData").forEach(d=>{
+                    dt[d.getAttribute('name')]=d.value
+                })
+                document.querySelector(".feedBackBtnWr").classList.add("hidden")
+                document.querySelector(".feedBackSuccess").classList.remove("hidden")
+                let token=await grecaptcha.execute('6LcQafkqAAAAAKNERbaoG1KfKbrNXsJSmeUJU3sN', {action: 'submit'})
+                let r = await fetch("/api/feedback", {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({dt, token})
+                })
+            }
+
+
+

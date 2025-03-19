@@ -8,12 +8,23 @@ const multer =require( 'multer')
 const upload = multer({dest: "./public/uploads"});
 
 const fs  =require( 'fs')
+const axios=require( 'axios')
 
 
 const app = express();
 const PORT = process.env.PORT || 4041;
 const knex=require("knex");
 const db=knex( require("./knexfile").development)
+const nodemailer= require( "nodemailer-promise");
+var mailer = nodemailer.config({
+    host: 'smtp.mail.ru',
+    port: 465,
+    secure: true, // true for 465, false for other ports 587
+    auth: {
+        user: "info@uralcyberfin.ru",
+        pass: "hbyNp46AsLCuHJAHt8Z3"//"qDNe2ML9njBBnaDqp4DU"это для news// metroBiberevo
+    }
+});
 
 
 app.use(cors());
@@ -27,15 +38,77 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/projects", (req, res) => {
-  res.render("projects");
-});
+
 app.get("/admin", (req, res) => {
   res.render("admin");
 });
-app.get("/start", (req, res) => {
-  res.render("start");
+app.get("/start", async (req, res) => {
+    let projects=await db("projects").where({isDeleted:0, isEnable:1}).orderBy("sort")
+
+    res.render("start", {projects});
 });
+app.get("/projects", async (req, res) => {
+    let projects=await db("projects").where({isDeleted:0, isEnable:1}).orderBy("sort")
+    console.log(projects)
+    res.render("pageProjects", {projects});
+});
+app.get("/feedBackForm", async (req, res) => {
+
+    res.render("feedBackForm", );
+});
+
+app.get("/project/:id", async (req, res) => {
+    try {
+        let projects = await db("projects").where({isDeleted: 0, isEnable: 1, id: req.params.id}).orderBy("sort")
+        if (projects.length == 0)
+            return res.sendStatus(404)
+        res.render("projectPopup", {proj:projects[0]})
+
+
+    }
+    catch (e) {
+        console.warn(e)
+        return res.sendStatus(500)
+    }
+});
+
+app.post("/api/feedback", async (req, res) => {
+    try {
+
+        const verificationURL = "https://www.google.com/recaptcha/api/siteverify?secret=6LcQafkqAAAAAIYgDnETI0mjg4JQJpzPom_5nGBY"
+            + "&response=" + req.body.token;// + "&remoteip=" + req.headers['x-forwarded-for'];
+        let capcha = await axios.get(verificationURL);
+        console.log(capcha.data)
+        if (!capcha.data.success) {
+            console.warn("no capcha")
+            return res.json({
+                status: "error",
+                errMsg: "Вы не прошли проверку capcha"
+            })
+        }
+
+        let html=""
+        for(let key of Object.keys(req.body.dt)){
+            html+=key+": "+ req.body.dt[key]+"\n"
+
+        }
+        await mailer(
+            {
+                from: 'info@uralcyberfin.ru',
+                to: "info@effectcomm.ru",
+                subject: "Новое сообщение с сайта effectomm.ru",
+                text:html
+            });
+        res.json(true)
+
+    }
+    catch (e) {
+        console.warn(e)
+        return res.sendStatus(500)
+    }
+});
+
+
 app.get("/api/projects",async (req, res) => {
   try {
     return res.json((await db("projects").where({isDeleted:0}).orderBy("sort")))
@@ -79,7 +152,7 @@ app.post("/api/uploadFile",upload.single('file'), async (req, res) => {
         await fs.promises.rename(req.file.path, newPath)
         req.file.path = newPath;
         req.file.filename = req.file.filename + ext;
-        res.json("/uploads"+req.file.filename)
+        res.json("/uploads/"+req.file.filename)
     }
     catch (e) {
         console.warn(e)

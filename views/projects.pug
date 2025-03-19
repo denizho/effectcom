@@ -5,17 +5,29 @@
                 .projectsTitleHeader.hiLite Проекты
             .projectsTitleItem
                 .projectsTitleAll
-                    .projectsTitleAllTlte Все проекты
+                    a.projectsTitleAllTlte(href="/projects") Все проекты
                     .projectsTitleAllIco
                         <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M24 9.5L35.5 21M35.5 21L24 32.5M35.5 21H4" stroke="#DDDDDD" stroke-opacity="0.866667" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
         .projectsWr
             .projectContainer
-                .project
-                    .projectBox
-                        .projectBWr
-                            video(src="/images/ifc2024.mp4" muted autoplay loop)
-                    .projectTitle Финансовый конгресс 2024
+                each proj, i in projects
+                    .project
+                        .projectGroup
+                            .projectContent
+                                .projectBox
+                                    .projectBWr
+                                        if proj.isVideo==1
+                                            video(src=proj.video muted autoplay loop)
+                                        else
+                                            img(src=proj.img)
+                                .projectTitle #{proj.title}
+                            .projectNext
+                                if i<projects.length-1
+                                    .projectNextBtn(onclick="nextProj(this)") Следующий<br>проект
+                                else
+                                    .projectNextBtn(onclick="firstProj(this)") C<br>начала
+
 
 

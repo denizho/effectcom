@@ -1,0 +1,23 @@
+.popup.feedBackForm
+    .closeWr
+        .closeWrIco(onclick="closePopups()")
+            <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 1L39 39" stroke="white" stroke-width="3" stroke-linecap="round"/>
+            <path d="M39 1L0.999999 39" stroke="white" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+    .feedBackFormBoby
+        .feedBackFormHead Напишите нам
+        .feedBackFormDescr Есть вопрос? Свяжитесь с нами и мы предложим интересное решение
+        .feedBackFormRow
+            input.fbData(placeholder="Имя*" name="name")
+        .feedBackFormRow
+            input.fbData(placeholder="Email*" name="email")
+        .feedBackFormRow
+            input.fbData(placeholder="Телефон*" name="phone")
+        .feedBackFormRow
+            textarea.fbData(placeholder="Комментарий (по желанию)" name="comment")
+        .feedBackFormRow.feedBackBtnWr
+            .feedBackBtn(onclick="sendFeedback()") Отправить
+        .feedBackFormRow.feedBackSuccess.hidden
+            .feedBackFormHead Спасибо, Ваше сообщение отправлено.
+        .feedBackFormRow &nbsp;
