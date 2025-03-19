@@ -151,6 +151,7 @@ a{
     display: flex;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
 
 }
 .hiLite{
@@ -289,6 +290,10 @@ h1 {
 .projectsWr{
     margin-top:32px;
     overflow-x: scroll;
+
+}
+.projectsWr::-webkit-scrollbar {
+    display: none;
 }
 .projectBox{
     position: relative;
@@ -524,4 +529,205 @@ input:active,input:focus, textarea:active, textarea:focus{
 }
 .grecaptcha-badge{
     display:none;
+}
+.mainTower{
+    max-width: 1920px;
+    margin: 0 auto;
+}
+.mobile{
+    display: none;
+}
+@media all and (max-width: 850px) {
+
+    .logo{
+        width: 50vw;
+        max-width: 300px;
+    }
+    .logo svg{
+        width: 100%;
+        height: auto;
+    }
+    .headerAddressBox, .btnContentItemText{
+        display: none;
+    }
+    .footerRow{
+        display: block;
+    }
+    .headerContent{
+        padding:8px;
+    }
+    h1{
+        font-size: 22px;
+        line-height: 1.4;
+    }
+    .firstImg{
+        height: 100vh;
+    }
+    .firstImg img{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+    .firstText{
+        width: 100%;
+    }
+    .firstTextBox{
+        padding: 16px;
+    }
+    .scroolSpy{
+        opacity: 1;
+    }
+    .second{
+        padding: 16px;
+        width: 100%;
+        box-sizing: border-box;
+        margin: 16px auto;
+    }
+    .secondTitle{
+        font-size: 14px;
+    }
+    .secondText{
+        font-size: 18px;
+        line-height: 1.4;
+    }
+    .secondRowItemText{
+        font-size: 22px;
+    }
+    .secondRowItemFooter{
+        font-size: 12px;
+    }
+    .secondRowItemHeader svg{
+        width: 16px;
+        height: auto;
+        margin-bottom:11px
+    }
+    .secondRowItem{
+        padding: 12px;
+        padding-bottom: 8px;
+        min-width: 115px;
+    }
+    .secondRowItemHeader {
+        padding-left: 12px;
+        justify-content: flex-start;
+        gap: 8px;
+    }
+    .secondRow {
+        margin-top: 16px;
+
+    }
+    .mobile{
+        display: inherit;
+    }
+    .decktop{
+        display: none;
+    }
+    .projects {
+        width: 100%;
+        padding: 16px;
+        box-sizing: border-box;
+        margin: auto;
+        margin-bottom: 16px;
+    }
+    .projectsTitleHeader{
+        font-size: 20px;
+    }
+    .projectContent {
+        width: calc(100vw - 32px);
+    }
+    .projectBWr video {
+
+        border-radius: 8px;
+    }
+    .projectTitle {
+        font-size: 18px;
+    }
+    .projectNext{
+        display: none;
+    }
+    .projectGroup{
+        grid-template-columns: calc(100vw);
+    }
+    .projectBWr img {
+
+        border-radius: 8px;
+    }
+    .projectsNextItemText{
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+    .projectsNext{
+        margin-top: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    .btn{
+        padding: 8px 8px;
+        cursor: pointer;
+        width: max-content;
+        border-radius: 50%;
+
+    }
+    .btnContentItem svg, {
+        width: 12px;
+        height: auto;
+    }
+    .colorSwith svg{
+        width: 100%;
+        height: auto;
+    }
+
+    .headerSocialBox{
+        gap:12px
+    }
+    .header {
+
+        width: 100vw;
+    }
+    .footerItems{
+        display: block;
+    }
+    .footerItem {
+
+        justify-content: flex-start;
+        gap: 8px;
+        margin-top:8px;
+    }
+    .popup {
+        width: 100vw;
+        height: 100vh;
+        box-sizing: border-box;
+        border-radius: 0;
+        max-width: 1200px;
+        overflow: auto;
+    }
+    .feedBackFormHead {
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    .feedBackFormBoby {
+        padding: 0 8px;
+    }
+    .closeWrIco svg {
+        width: 18px;
+        height: auto;
+    }
+    .projTitle {
+        padding: 8px;
+        font-size: 18px;
+    }
+    .projTitleDescr{
+        font-size: 14px;
+    }
+    .projWr {
+        margin: 128px auto;
+        width:100%;
+        box-sizing: border-box;
+        padding: 0 16px;
+    }
+
 }
