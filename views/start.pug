@@ -1,0 +1,49 @@
+extends newLayout
+
+block content
+    include header
+    .fsTower
+        include first
+    .fsTower
+        include second
+    .fsTower
+        include projects
+
+    include footer
+
+    script.
+        window.onscroll=(e)=>{
+
+            if(window.scrollY>133)
+                header.classList.add("bg")
+            else
+                header.classList.remove("bg")
+        }
+        if(localStorage.getItem("white"))
+            setWhite();
+        function setBlack(){
+            document.body.classList.remove("whiteBg")
+            localStorage.removeItem("white")
+        }
+        function setWhite() {
+            document.body.classList.add("whiteBg");
+            localStorage.setItem("white", true)
+        }
+        const options = {
+            root: null,
+            rootMargin: "10px",
+            threshold: .3,
+        };
+        let observer = new IntersectionObserver(handleIntersect, options);
+        function handleIntersect(entries, observer) {
+            entries.forEach(e=>{
+                if(e.isIntersecting)
+                    e.target.classList.add("visible")
+            })
+            console.log(entries)
+
+        }
+        document.querySelectorAll(".scroolSpy").forEach(e=>{
+            observer.observe(e);
+        })
+

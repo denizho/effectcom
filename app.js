@@ -1,15 +1,26 @@
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
+const bodyParser = require('body-parser')
+
+const multer =require( 'multer')
+
+const upload = multer({dest: "./public/uploads"});
+
+const fs  =require( 'fs')
+
 
 const app = express();
 const PORT = process.env.PORT || 4041;
+const knex=require("knex");
+const db=knex( require("./knexfile").development)
+
 
 app.use(cors());
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
-
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
@@ -22,6 +33,64 @@ app.get("/projects", (req, res) => {
 app.get("/admin", (req, res) => {
   res.render("admin");
 });
+app.get("/start", (req, res) => {
+  res.render("start");
+});
+app.get("/api/projects",async (req, res) => {
+  try {
+    return res.json((await db("projects").where({isDeleted:0}).orderBy("sort")))
+  }catch (e) {
+    console.warn(e)
+    res.send(500)
+  }
+
+  });
+app.post("/api/project", async (req, res) => {
+  try {
+
+    if (!req.body.id) {
+      return res.json((await db("projects").insert(
+          {
+            title:"",
+            img:'',
+            video:'',
+            isVideo:false,
+            sort:0,
+            isEnable:false,
+            isDeleted:false
+          }, "*"))[0])
+    } else {
+      let id = req.body.id;
+      delete req.body.id;
+      console.log(req.body, id)
+      return res.json((await db("projects").update(req.body, "*").where({id}))[0])
+    }
+  }
+  catch (e) {
+    console.warn(e)
+    res.send(500)
+  }
+
+});
+app.post("/api/uploadFile",upload.single('file'), async (req, res) => {
+    try {
+        let ext = path.extname(req.file.originalname)
+        let newPath = req.file.path + ext
+        await fs.promises.rename(req.file.path, newPath)
+        req.file.path = newPath;
+        req.file.filename = req.file.filename + ext;
+        res.json("/uploads"+req.file.filename)
+    }
+    catch (e) {
+        console.warn(e)
+        res.send(500)
+    }
+
+});
+
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Сервер http://localhost:${PORT}`);
