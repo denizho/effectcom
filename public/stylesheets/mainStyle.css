@@ -157,15 +157,7 @@ a{
 .first{
     position: relative;
 }
-.firstFilter{
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 200;
-    background: green;
-}
+
 .firstTextBox{
     position: absolute;
     z-index: 100;
