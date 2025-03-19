@@ -2,7 +2,7 @@ const express = require("express");
 const path = require("path");
 const cors = require("cors");
 const bodyParser = require('body-parser')
-
+const logger = require('morgan');
 const multer =require( 'multer')
 
 const upload = multer({dest: "./public/uploads"});
@@ -30,6 +30,7 @@ var mailer = nodemailer.config({
 app.use(cors());
 
 app.set("view engine", "pug");
+app.use(logger("dev"))
 app.set("views", path.join(__dirname, "views"));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "public")));
