@@ -506,7 +506,7 @@ h1 {
     line-height: normal;
 }
 .feedBackFormRow{
-    margin-top: 32px;
+    margin-top: 26px;
 }
 input:active,input:focus, textarea:active, textarea:focus{
     outline: none !important;
