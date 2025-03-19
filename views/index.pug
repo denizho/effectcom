@@ -79,26 +79,60 @@ block content
                     .main__projects__title
                         .main__projects__titleGreen
                             p Проекты
-                        .main__projects__titleNight
+                        a.main__projects__titleNight(href="/projects")
                             p Все проекты
                             img(src="images/main/main__projects__arrow.svg", alt="Arrow")
-                    .main__projects__video
-                    .main__projects__video__subtitle
-                        p SubTitle
-                .main__projects__nextel 
+                    .swiper-container.desktop
+                        .swiper-wrapper.desktop
+                            .swiper-slide
+                                .main__projects__video
+                                .main__projects__video__subtitle 
+                                    p subtitle 1
+                            .swiper-slide
+                                .main__projects__video
+                                .main__projects__video__subtitle 
+                                    p subtitle 2
+                            .swiper-slide
+                                .main__projects__video
+                                .main__projects__video__subtitle 
+                                    p subtitle 3
+                            .swiper-slide
+                                .main__projects__video
+                                .main__projects__video__subtitle 
+                                    p subtitle 1
+                            .swiper-slide
+                                .main__projects__video
+                                .main__projects__video__subtitle 
+                                    p subtitle 2
+                            .swiper-slide
+                                .main__projects__video
+                                .main__projects__video__subtitle 
+                                    p subtitle 3
+                .main__projects__nextel(id="next-project") 
                     p Следующий 
-                    |проект
+                    | проект
         .main__projects.mobile
             .main__projects__title
                 .main__projects__titleGreen
                     p Проекты
-            .main__projects__video
-            .main__projects__video__subtitle
-                p SubTitle
-            .main__projects__next
+            .swiper-container.mobile
+                .swiper-wrapper.mobile
+                    .swiper-slide.mobile
+                        .main__projects__video
+                        .main__projects__video__subtitle
+                            p SubTitle
+                    .swiper-slide.mobile
+                        .main__projects__video
+                        .main__projects__video__subtitle
+                            p SubTitle2
+                    .swiper-slide.mobile
+                        .main__projects__video
+                        .main__projects__video__subtitle
+                            p SubTitle3
+            .main__projects__next#next-projectmob
                 img(src="images/main/main__projects__arrowMobile.svg")
                 p Следующий проект
-            .main__projects__button
+            a.main__projects__button(href="/projects")
                 button Все проекты
     footer
         .footer__container
@@ -115,3 +149,25 @@ block content
                     img(src="images/footer/footer__email.svg")
                     p info@effectcomm.ru
     script(src="javascripts/utils.js")
+    script(src="https://unpkg.com/swiper/swiper-bundle.min.js")
+    script.
+        const swiper = new Swiper('.swiper-container.desktop', {
+        loop: true,
+        slidesPerView: '1',
+        spaceBetween: 250,
+        centeredSlides: true, 
+        });
+        const nextProjectButton = document.getElementById('next-project');
+        nextProjectButton.addEventListener('click', () => {
+        swiper.slideNext();
+        });
+       
+        const swipermob = new Swiper('.swiper-container.mobile', {
+        loop: true,
+        slidesPerView: 1, 
+        spaceBetween: 20,
+        });
+        const nextProjectButtonmob = document.getElementById('next-projectmob');
+        nextProjectButtonmob.addEventListener('click', () => {
+            swipermob.slideNext();
+        });

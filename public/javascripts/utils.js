@@ -11,9 +11,12 @@ function updateTheme(isDark) {
   document
     .querySelector(".main__projects__nextel")
     .classList.toggle("dark", isDark);
-  document
-    .querySelector(".main__projects__video__subtitle p")
-    .classList.toggle("dark", isDark);
+  const subtitles = document.querySelectorAll(
+    ".main__projects__video__subtitle p"
+  );
+  subtitles.forEach((subtitle) => {
+    subtitle.classList.toggle("dark", isDark);
+  });
   document.querySelector("footer").classList.toggle("dark", isDark);
 
   const mainText = document.querySelector(".main__text");
