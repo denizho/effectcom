@@ -51,9 +51,15 @@ app.get("/admin", (req, res) => {
   res.render("admin");
 });
 app.get("/start", async (req, res) => {
+    try {
     let projects=await db("projects").where({isDeleted:0, isEnable:1}).orderBy("sort")
 
     res.render("start", {projects});
+    }
+    catch (e) {
+        console.warn(e)
+        res.sendStatus(500)
+    }
 });
 app.get("/projects", async (req, res) => {
     let projects=await db("projects").where({isDeleted:0, isEnable:1}).orderBy("sort")
