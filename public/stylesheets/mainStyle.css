@@ -184,6 +184,9 @@ h1 {
     line-height: normal;
 }
 .whiteBg h1{
+    color: #FFFFFF;
+}
+.whiteBg h1.projPage{
     color: #20282A;
 }
 .second{
