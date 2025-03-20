@@ -713,11 +713,14 @@ input:active,input:focus, textarea:active, textarea:focus{
     }
     .popup {
         width: 100vw;
-        height: 100vh;
+        height: calc(100vh - 50px);
         box-sizing: border-box;
         border-radius: 0;
         max-width: 1200px;
         overflow: auto;
+    }
+    .feedBackFormRow {
+        margin-top: 16px;
     }
     .feedBackFormHead {
         font-size: 22px;
