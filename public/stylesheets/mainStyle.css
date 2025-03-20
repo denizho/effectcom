@@ -207,7 +207,7 @@ h1 {
 
 }
 .secondRow{
-    margin-top: 64px;
+    margin-top: 128px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -744,6 +744,10 @@ input:active,input:focus, textarea:active, textarea:focus{
         width:100%;
         box-sizing: border-box;
         padding: 0 16px;
+    }
+    .secondRow{
+
+        justify-content: space-around;
     }
 
 }

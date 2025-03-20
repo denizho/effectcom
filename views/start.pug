@@ -46,6 +46,20 @@ block content
         document.querySelectorAll(".scroolSpy").forEach(e=>{
             observer.observe(e);
         })
+        function ffProj(){
+            let arr=[]
+            document.querySelectorAll("project").forEach(d=>[
+                arr.push(d)
+            ])
+            arr=arr.filter(d=>{
+                return ! d.classList.contains("noVisible")
+            })
+            if(arr.length>1)
+                nextProj(arr[0].querySelector(".projectNextBtn"))
+            else
+                firstProj();
+
+        }
         function nextProj(ctrl){
             ctrl.closest(".project").classList.add("noVisible")
             setTimeout(()=>{
