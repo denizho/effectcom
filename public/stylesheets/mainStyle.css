@@ -752,5 +752,10 @@ input:active,input:focus, textarea:active, textarea:focus{
 
         justify-content: space-around;
     }
+    .projTitle {
+
+        border-radius: 0 0 8px 8px;
+
+    }
 
 }
