@@ -311,6 +311,9 @@ h1 {
 .projectsWr::-webkit-scrollbar {
     display: none;
 }
+.projectsWr {
+    scrollbar-width: none;
+}
 .projectBox{
     position: relative;
     padding-bottom: 56.25%; /* 16:9 */
