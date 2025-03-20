@@ -20,46 +20,53 @@ block content
             .projects__title
                 p Проекты
             .projects__videos 
-                .project__video
-                    .overlay
-                    .project__video__content
-                        .project__fullname
-                            p Полное название и описание
-                        .project__details
-                            .project__titles
-                                .project__video__title
-                                    h2 Финансовый конгресс
-                                .project__video__subtitle
-                                    h3 Санкт-Петербург, 2024
+                .projects__videos
+                    .project__video(onclick="showVideo(this)" style="background-image: url('https://www.sostav.ru/images/news/2019/06/14/zs2zykzr.png');")
+                        .overlay
+                        .project__video__content
+                            .project__fullname
+                                p Полное название и описание
+                            .project__details
+                                .project__titles
+                                    .project__video__title
+                                        h2 Финансовый конгресс
+                                    .project__video__subtitle
+                                        h3 Санкт-Петербург, 2024
                             .project__button
-                                .button__play   
-                .project__video
-                    .overlay
-                    .project__video__content
-                        .project__fullname
-                            p Полное название и описание
-                        .project__details
-                            .project__titles
-                                .project__video__title
-                                    h2 Финансовый конгресс
-                                .project__video__subtitle
-                                    h3 Санкт-Петербург, 2024
-                            .project__button
-                                .button__play                 
-                .project__video
-                    .overlay
-                    .project__video__content
-                        .project__fullname
-                            p Полное название и описание
-                        .project__details
-                            .project__titles
-                                .project__video__title
-                                    h2 Финансовый конгресс
-                                .project__video__subtitle
-                                    h3 Санкт-Петербург, 2024
-                            .project__button
-                                .button__play   
+                                .button__play
 
+                        iframe.videoIframe(src="https://vkvideo.ru/video_ext.php?oid=-26284064&id=456297931&hd=2&autoplay=0", allow="encrypted-media; fullscreen; picture-in-picture;screen-wake-lock", frameborder="0", allowfullscreen, style="display: none;")
+
+                    .project__video(onclick="showVideo(this)" style="background-image: url('https://www.sostav.ru/images/news/2019/06/14/zs2zykzr.png');")
+                        .overlay
+                        .project__video__content
+                            .project__fullname
+                                p Полное название и описание
+                            .project__details
+                                .project__titles
+                                    .project__video__title
+                                        h2 Финансовый конгресс
+                                    .project__video__subtitle
+                                        h3 Санкт-Петербург, 2024
+                            .project__button
+                                .button__play
+
+                        iframe.videoIframe(src="https://vkvideo.ru/video_ext.php?oid=-26284064&id=456297931&hd=2&autoplay=0", allow="encrypted-media; fullscreen; picture-in-picture;screen-wake-lock", frameborder="0", allowfullscreen, style="display: none;")
+                    .project__video(onclick="showVideo(this)" style="background-image: url('https://www.sostav.ru/images/news/2019/06/14/zs2zykzr.png');")
+                        .overlay
+                        .project__video__content
+                            .project__fullname
+                                p Полное название и описание
+                            .project__details
+                                .project__titles
+                                    .project__video__title
+                                        h2 Финансовый конгресс
+                                    .project__video__subtitle
+                                        h3 Санкт-Петербург, 2024
+                            .project__button
+                                .button__play
+
+                        iframe.videoIframe(src="https://vkvideo.ru/video_ext.php?oid=-26284064&id=456297931&hd=2&autoplay=0", allow="encrypted-media; fullscreen; picture-in-picture;screen-wake-lock", frameborder="0", allowfullscreen, style="display: none;")
     footer
         .footer__container
             .footer__content
@@ -75,3 +82,16 @@ block content
                     img(src="images/footer/footer__email.svg")
                     p info@effectcomm.ru
     script(src="javascripts/projects.js")
+    script.
+        function showVideo(element) {
+            const iframe = element.querySelector('.videoIframe');
+            const overlay = element.querySelector('.overlay');
+
+            overlay.style.display = 'none';
+            iframe.style.display = 'block';
+
+            const src = iframe.src;
+            iframe.src = src + '&autoplay=1';
+        }
+        
+      

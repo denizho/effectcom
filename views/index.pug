@@ -86,12 +86,22 @@ block content
                         .swiper-wrapper.desktop
                             .swiper-slide
                                 .main__projects__video
+                                    .video-preview(style="background-image: url('https://www.sostav.ru/images/news/2019/06/14/zs2zykzr.png');")
+                                        .playButton 
+                                            img(src="images/main/vkvideo__play.svg", alt="Play", class="play-icon")
+                                            img(src="images/main/vkvideo__play-hover.svg", alt="Play", class="hover-icon")
+                                    iframe.videoIframe(src="https://vkvideo.ru/video_ext.php?oid=-26284064&id=456297931&hd=2&autoplay=0", allow="encrypted-media; fullscreen; picture-in-picture;", frameborder="0", allowfullscreen, style="display: none;")
                                 .main__projects__video__subtitle 
-                                    p subtitle 1
+                                    p Мишустин проводит оперативное совещание с вице-премьерами
                             .swiper-slide
                                 .main__projects__video
+                                    .video-preview(style="background-image: url('https://www.sostav.ru/images/news/2019/06/14/zs2zykzr.png');")
+                                        .playButton 
+                                            img(src="images/main/vkvideo__play.svg", alt="Play", class="play-icon")
+                                            img(src="images/main/vkvideo__play-hover.svg", alt="Play", class="hover-icon")
+                                    iframe.videoIframe(src="https://vkvideo.ru/video_ext.php?oid=-26284064&id=456297931&hd=2&autoplay=0", allow="encrypted-media; fullscreen; picture-in-picture;", frameborder="0", allowfullscreen, style="display: none;")
                                 .main__projects__video__subtitle 
-                                    p subtitle 2
+                                    p Мишустин проводит оперативное совещание с вице-премьерами
                             .swiper-slide
                                 .main__projects__video
                                 .main__projects__video__subtitle 
@@ -119,12 +129,20 @@ block content
                 .swiper-wrapper.mobile
                     .swiper-slide.mobile
                         .main__projects__video
+                            .video-preview(style="background-image: url('https://www.sostav.ru/images/news/2019/06/14/zs2zykzr.png');")
+                                .playButton 
+                                    img(src="images/main/vkvideo__play.svg", alt="Play", class="play-icon")
+                            iframe.videoIframe(src="https://vkvideo.ru/video_ext.php?oid=-26284064&id=456297931&hd=2&autoplay=0", allow="encrypted-media; fullscreen; picture-in-picture;", frameborder="0", allowfullscreen, style="display: none;")
                         .main__projects__video__subtitle
-                            p SubTitle
+                            p Мишустин проводит оперативное совещание с вице-премьерами
                     .swiper-slide.mobile
                         .main__projects__video
+                            .video-preview(style="background-image: url('https://www.sostav.ru/images/news/2019/06/14/zs2zykzr.png');")
+                                .playButton 
+                                    img(src="images/main/vkvideo__play.svg", alt="Play", class="play-icon")
+                            iframe.videoIframe(src="https://vkvideo.ru/video_ext.php?oid=-26284064&id=456297931&hd=2&autoplay=0", allow="encrypted-media; fullscreen; picture-in-picture;", frameborder="0", allowfullscreen, style="display: none;")
                         .main__projects__video__subtitle
-                            p SubTitle2
+                            p Мишустин проводит оперативное совещание с вице-премьерами
                     .swiper-slide.mobile
                         .main__projects__video
                         .main__projects__video__subtitle
@@ -170,4 +188,17 @@ block content
         const nextProjectButtonmob = document.getElementById('next-projectmob');
         nextProjectButtonmob.addEventListener('click', () => {
             swipermob.slideNext();
+        });
+        const playButtons = document.querySelectorAll('.playButton');
+        const iframes = document.querySelectorAll('.videoIframe');
+        const previews = document.querySelectorAll('.video-preview');
+
+        playButtons.forEach((button, index) => {
+            button.addEventListener('click', function() {
+                previews[index].style.display = 'none';
+                iframes[index].style.display = 'block';
+
+                const src = iframes[index].src;
+                iframes[index].src = src + '&autoplay=1';
+            });
         });
