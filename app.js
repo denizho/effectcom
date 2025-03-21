@@ -124,9 +124,32 @@ app.post("/api/feedback", async (req, res) => {
 });
 
 
+app.post("/api/addPhotoToProj",async (req, res) => {
+    try {
+        let r=await db("t_photos").insert({
+            projectid:req.body.id,
+            filepath:req.body.photo,
+            sort:0,
+            isEnable:0,
+            isDeleted:0
+        }, "*")
+
+        return res.json(r[0])
+    }catch (e) {
+        console.warn(e)
+        res.send(500)
+    }
+
+});
+
 app.get("/api/projects",async (req, res) => {
   try {
-    return res.json((await db("projects").where({isDeleted:0}).orderBy("sort")))
+      let projects=await db("projects").where({isDeleted:0}).orderBy("sort")
+      for(let p of projects){
+          p.photos=await db("t_photos").where({projectid:p.id, isDeleted:0}).orderBy("sort")
+      }
+
+    return res.json(projects)
   }catch (e) {
     console.warn(e)
     res.send(500)
@@ -179,7 +202,7 @@ app.post("/api/file", async (req, res) => {
 });
 app.post("/api/project", async (req, res) => {
   try {
-
+    delete req.body.photos;
     if (!req.body.id) {
       return res.json((await db("projects").insert(
           {

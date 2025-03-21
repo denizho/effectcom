@@ -113,6 +113,8 @@ block content
                         .btn-group.btn-group-sm.mt-2
                             .btn.btn-secondary(v-if="item.isVideo==0" v-on:click="item.isVideo=1;updateProject(item)") Показана картинка
                             .btn.btn-success(v-if="item.isVideo==1" v-on:click="item.isVideo=0;updateProject(item)" ) Показано видео
+                    .btn-group.btn-group-sm.mt-2
+                        .btn.btn-sm.btn-success(@click="addPhotosToProj(item)") Добавить фото (пропорции 16:9)
                     .mt-3.preview
                         .projectBox
                             .projectBWr(v-if="item.isVideo==0")
@@ -121,6 +123,8 @@ block content
                                 video(:src="item.video" playsinline muted autoplay loop)
                             .projectAtitle
                                 .projectAtitleText {{item.title}}
+
+
 
                     .btn-group.btn-group-sm.mt-2
                         .btn.btn-secondary(v-if="item.isEnable==0" v-on:click="item.isEnable=1;updateProject(item)") Выключено
@@ -140,6 +144,33 @@ block content
 
             },
             methods:{
+                addPhotosToProj:async function(proj){
+                    let inp = document.createElement("input")
+                    inp.type = "file"
+                    inp.setAttribute("multiple", true)
+                    inp.setAttribute("accept", "image/png, image/jpeg")
+                    inp.click()
+                    inp.onchange = async () => {
+                        for (let file of inp.files) {
+                            let formData = new FormData()
+                            formData.append('file', file, file.name);
+                            let ret = await fetch("/api/uploadFile", {
+                                method: 'post',
+                                body: formData,
+                            })
+
+                            ret = await fetch("/api/addPhotoToProj", {
+                                method: 'post',
+                                body: JSON.stringify( {
+                                    id:proj.id,
+                                    photo:await ret.json()
+                                }),
+                            })
+                            proj.photos.unshift(await ret.json())
+
+                        }
+                    }
+                },
                 copy:async function(text) {
                     await navigator.clipboard.writeText(text)
                 },
