@@ -168,7 +168,7 @@ app.post("/api/addFile",upload.single('file'), async (req, res) => {
         req.file.path = newPath;
         req.file.filename = req.file.filename + ext;
 
-        let r= await knex("t_files").insert({
+        let r= await db("t_files").insert({
             title:req.file.originalname,
             filename:newPath,
             filepath:newPath,
