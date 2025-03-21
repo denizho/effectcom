@@ -133,6 +133,50 @@ app.get("/api/projects",async (req, res) => {
   }
 
   });
+
+app.get("/api/files",async (req, res) => {
+    try {
+        let files=(await db("t_files").where({isDeleted:0}).orderBy("sort"))
+        files.forEach(f=>{
+            f.url=f.filepath.replace('public', 'https://effectcomm.ru')
+        })
+        return res.json(files)
+    }catch (e) {
+        console.warn(e)
+        res.send(500)
+    }
+
+});
+
+app.post("/api/file", async (req, res) => {
+    try {
+
+        if (!req.body.id) {
+            return res.json((await db("t_files").insert(
+                {
+                    title:req.file.originalname,
+                    filename:newPath,
+                    filepath:newPath,
+                    origName:req.file.originalname,
+                    size:0,
+                    isEnable:0,
+                    isDeleted:0,
+                    sort:0
+                }, "*"))[0])
+        } else {
+            let id = req.body.id;
+            delete req.body.id;
+            delete req.body.url;
+            console.log(req.body, id)
+            return res.json((await db("t_files").update(req.body, "*").where({id}))[0])
+        }
+    }
+    catch (e) {
+        console.warn(e)
+        res.send(500)
+    }
+
+});
 app.post("/api/project", async (req, res) => {
   try {
 
@@ -175,7 +219,8 @@ app.post("/api/addFile",upload.single('file'), async (req, res) => {
             origName:req.file.originalname,
             size:0,
             isEnable:0,
-            isDeleted:0
+            isDeleted:0,
+            sort:0
 
         }, "*")
         res.json(r[0])

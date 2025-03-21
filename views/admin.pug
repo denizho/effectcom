@@ -63,6 +63,26 @@ block content
         .mt-3.section(v-if="section=='files'")
             h4 Файлы
             .btn.btn-sm.btn-success(@click="addFile()") Добавить файл
+            .projects
+                .mt-3.project(v-for="item in files" v-if="item.isDeleted==0")
+                    .small id:{{item.id}}
+                    .mt-2
+                        label Номер с начала
+                        .input-group.input-group-sm
+                            input.form-control(v-model="item.sort" style="width:100px" v-on:change="updateFile(item)")
+                    .mt-2
+                        label Название
+                        .input-group.input-group-sm
+                            input.form-control(v-model="item.title" v-on:change="updateFile(item)")
+                    .mt-2
+                        label URL
+                        .input-group.input-group-sm
+                            input.form-control(v-model="item.url"  readonly)
+                            .btn.btn-outline-secondary(v-on:click="copy(item.url)") скопировать
+                    .btn-group.btn-group-sm.mt-2
+                        .btn.btn-secondary(v-if="item.isEnable==0" v-on:click="item.isEnable=1;updateFile(item)") Выключено
+                        .btn.btn-success(v-if="item.isEnable==1" v-on:click="item.isEnable=0;updateFile(item)") Включено
+                        .btn.btn-danger(v-on:click="delFile(item)") Удалить
         .mt-3.section(v-if="section=='projects'")
             h4 Проекты
             .btn.btn-sm.btn-success(@click="addProj()") Добавить проект
@@ -120,6 +140,10 @@ block content
 
             },
             methods:{
+                copy:async function(text) {
+                    await navigator.clipboard.writeText(text)
+                },
+
                 addFile:async function(item) {
                     let inp = document.createElement("input")
                     inp.type = "file"
@@ -158,12 +182,28 @@ block content
                         }
                     }
                 },
+                delFile: async function (item) {
+                    if (confirm("Вы уверены?")) {
+                        item.isDeleted = 1;
+                        await this.updateFile(item);
+                    }
+                },
                 delProject:async function(item){
                     if(confirm("Вы уверены?"))
                     {
                         item.isDeleted=1;
                         await this.updateProject(item);
                     }
+                },
+                updateFile: async function (item) {
+                    let r = await fetch("/api/file", {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(item)
+                    })
                 },
                 updateProject:async function(item) {
                     let r = await fetch("/api/project", {
@@ -192,6 +232,8 @@ block content
                 console.log("vue ready")
                 let r = await fetch("/api/projects")
                 this.projects=await r.json()
+                r = await fetch("/api/files")
+                this.files = await r.json()
             }
         })
 
