@@ -160,6 +160,32 @@ app.post("/api/project", async (req, res) => {
   }
 
 });
+app.post("/api/addFile",upload.single('file'), async (req, res) => {
+    try {
+        let ext = path.extname(req.file.originalname)
+        let newPath = req.file.path + ext
+        await fs.promises.rename(req.file.path, newPath)
+        req.file.path = newPath;
+        req.file.filename = req.file.filename + ext;
+
+        let r= await knex("t_files").insert({
+            title:req.file.originalname,
+            filename:newPath,
+            filepath:newPath,
+            origName:req.file.originalname,
+            size:0,
+            isEnable:0,
+            isDeleted:0
+
+        }, "*")
+        res.json(r[0])
+    }
+    catch (e) {
+        console.warn(e)
+        res.send(500)
+    }
+
+});
 app.post("/api/uploadFile",upload.single('file'), async (req, res) => {
     try {
         let ext = path.extname(req.file.originalname)

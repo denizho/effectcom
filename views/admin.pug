@@ -56,7 +56,12 @@ block content
     .container#app
         .nav.nav-pills
             .nav-item
-                a.nav-link(active href="#" @clicl="section='projects'") Проекты
+                a.nav-link(active href="#" @click="section='projects'") Проекты
+            .nav-item
+                a.nav-link(active href="#" @click="section='files'") Файлы
+            .btn.btn-sm.btn-success(@click="addFile()") Добавить файл
+        .mt-3.section(v-if="section=='files'")
+            h4 Файлы
         .mt-3.section(v-if="section=='projects'")
             h4 Проекты
             .btn.btn-sm.btn-success(@click="addProj()") Добавить проект
@@ -109,10 +114,30 @@ block content
             el:"#app",
             data:{
                 section:"projects",
-                projects:[]
+                projects:[],
+                files:[]
 
             },
             methods:{
+                addFile:async function(item) {
+                    let inp = document.createElement("input")
+                    inp.type = "file"
+                    inp.setAttribute("multiple", false)
+                    inp.onchange = async () => {
+                        for (let file of inp.files) {
+                            let formData = new FormData()
+                            formData.append('file', file, file.name);
+                            let ret = await fetch("/api/addFile", {
+                                method: 'post',
+                                body: formData,
+                            })
+
+                             this.files.unshift(await ret.json());
+                            console.log(this.files)
+                        }
+                    }
+                    inp.click()
+                },
                 uploadImage:async function(item) {
                     let inp = document.createElement("input")
                     inp.type = "file"
