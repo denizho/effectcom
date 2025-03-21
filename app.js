@@ -126,6 +126,7 @@ app.post("/api/feedback", async (req, res) => {
 
 app.post("/api/addPhotoToProj",async (req, res) => {
     try {
+        console.log(req.body)
         let r=await db("t_photos").insert({
             projectid:req.body.id,
             filepath:req.body.photo,
@@ -165,6 +166,24 @@ app.get("/api/files",async (req, res) => {
         })
         return res.json(files)
     }catch (e) {
+        console.warn(e)
+        res.send(500)
+    }
+
+});
+
+app.post("/api/photo", async (req, res) => {
+    try {
+
+
+            let id = req.body.id;
+            delete req.body.id;
+            delete req.body.url;
+
+            return res.json((await db("t_photos").update(req.body, "*").where({id}))[0])
+
+    }
+    catch (e) {
         console.warn(e)
         res.send(500)
     }
