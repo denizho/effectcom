@@ -59,9 +59,10 @@ block content
                 a.nav-link(active href="#" @click="section='projects'") Проекты
             .nav-item
                 a.nav-link(active href="#" @click="section='files'") Файлы
-            .btn.btn-sm.btn-success(@click="addFile()") Добавить файл
+
         .mt-3.section(v-if="section=='files'")
             h4 Файлы
+            .btn.btn-sm.btn-success(@click="addFile()") Добавить файл
         .mt-3.section(v-if="section=='projects'")
             h4 Проекты
             .btn.btn-sm.btn-success(@click="addProj()") Добавить проект
