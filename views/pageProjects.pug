@@ -35,6 +35,7 @@ block content
         document.querySelectorAll(".splide").forEach(e=>{
             new Splide( "#"+e.id, {
                 type: 'loop',
+                lazyLoad:'nearby',
                 perPage: 1,autoplay:true} ).mount();
         })
         let videoObserver = new IntersectionObserver((entries, observer) => {
@@ -53,7 +54,7 @@ block content
             videoObserver.observe(e);
         })
         async function openProj(id){
-            if(document.getElementById(id).getAttribute("isvideo")==0)
+            if(document.getElementById("project"+id).getAttribute("isvideo")==0)
                 return;
 
             let r=await fetch("/project/"+id);
