@@ -1,4 +1,6 @@
 extends newLayout
+block head
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
 
 block content
     .mustWhite
@@ -14,14 +16,24 @@ block content
                                 if proj.isVideo == 1
                                     video(src=proj.video muted loop playsinline)
                                 else
-                                    img(src=proj.img)
+                                    //img(src=proj.img)
+                                    .splide
+                                        .splide__track
+                                        .splide__list
+                                            .splide__slide
+                                                img(src=proj.img)
+                                                for photo in proj.photos
+                                                    img(src=photo.filepath)
                             .projTitle
                                 .projTitleText #{proj.title}
                                 .projTitleDescr #{proj.descr}
 
     include footer
-
+    script(src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js" )
     script.
+        document.querySelectorAll(".splide").forEach(e=>{
+            new Splide( e ).mount();
+        })
         let videoObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(e => {
                 if (e.isIntersecting)
