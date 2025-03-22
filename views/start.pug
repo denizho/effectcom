@@ -35,6 +35,14 @@ block content
             threshold: .3,
         };
         let observer = new IntersectionObserver(handleIntersect, options);
+        let videoObserver = new IntersectionObserver((entries, observer)=>{
+            entries.forEach(e => {
+                if (e.isIntersecting)
+                    e.target.play();
+                else
+                    e.target.pause();
+            })
+        }, options);
         function handleIntersect(entries, observer) {
             entries.forEach(e=>{
                 if(e.isIntersecting)
@@ -45,6 +53,9 @@ block content
         }
         document.querySelectorAll(".scroolSpy").forEach(e=>{
             observer.observe(e);
+        })
+        document.querySelectorAll(".projectVideo").forEach(e => {
+            videoObserver.observe(e);
         })
         function ffProj(){
             let arr=[]
