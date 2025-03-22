@@ -10,7 +10,7 @@ block content
             h1.projPage Проекты
             .projBox
                 each proj in projects
-                    .proj.scroolSpy(onclick="openProj("+proj.id+")" id="project"+proj.id)
+                    .proj.scroolSpy(onclick="openProj("+proj.id+")" id="project"+proj.id isvideo=proj.isVideo)
                         .projectBox
                             .projectBWr
                                 if proj.isVideo == 1
@@ -53,6 +53,9 @@ block content
             videoObserver.observe(e);
         })
         async function openProj(id){
+            if(document.getElementById(id).getAttribute("isvideo")==0)
+                return;
+
             let r=await fetch("/project/"+id);
             let div=document.createElement("div")
             div.classList.add("fsDiv");
