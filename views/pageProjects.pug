@@ -63,9 +63,9 @@ block content
         async function openProj(id){
             let prog=document.getElementById("project"+id)
             if(prog.getAttribute("isvideo")==0){
-               let  swipersindex=proj.getAttribute("swipersindex")
+               let  swipersindex=prog.getAttribute("swipersindex")
                 if(swipersindex){
-                   // swipers[swipersindex].next();
+                    swipers[swipersindex].go(swipers[swipersindex].index)
                 }
             }
                 return;
