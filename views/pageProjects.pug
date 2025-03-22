@@ -19,11 +19,11 @@ block content
                                     //img(src=proj.img)
                                     .splide
                                         .splide__track
-                                        .splide__list
-                                            .splide__slide
-                                                img(src=proj.img)
-                                                each photo in proj.photos
-                                                    img(src=photo.filepath)
+                                            .splide__list
+                                                .splide__slide
+                                                    img(src=proj.img)
+                                                    each photo in proj.photos
+                                                        img(src=photo.filepath)
                             .projTitle
                                 .projTitleText #{proj.title}
                                 .projTitleDescr #{proj.descr}
