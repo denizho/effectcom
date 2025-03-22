@@ -51,7 +51,7 @@ header {
   width: var(--logoWidth);
   height: var(--logoHeight);
 }
-.projectBox{
+.projectContent{
   cursor: pointer;
 }
 
