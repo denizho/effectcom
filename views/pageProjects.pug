@@ -29,7 +29,11 @@ block content
                 else
                     e.target.pause();
             })
-        }, options);
+        }, {
+            root: null,
+            rootMargin: "10px",
+            threshold: .3,
+        });
         document.querySelectorAll("video").forEach(e => {
             videoObserver.observe(e);
         })
