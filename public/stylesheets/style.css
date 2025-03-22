@@ -51,6 +51,9 @@ header {
   width: var(--logoWidth);
   height: var(--logoHeight);
 }
+.projectBox{
+  cursor: pointer;
+}
 
 .header__logo img {
   width: 100%;

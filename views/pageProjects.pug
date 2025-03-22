@@ -8,7 +8,7 @@ block content
             h1.projPage Проекты
             .projBox
                 each proj in projects
-                    .proj.scroolSpy(onclick="openProj("+proj.id+")")
+                    .proj.scroolSpy(onclick="openProj("+proj.id+")" id="project"+proj.id)
                         .projectBox
                             .projectBWr
                                 if proj.isVideo == 1

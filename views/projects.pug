@@ -16,10 +16,10 @@
                     .project
                         .projectGroup
                             .projectContent
-                                .projectBox
+                                .projectBox(onclick=="document.location.href='/projects#project"+proj.id+"'")
                                     .projectBWr
                                         if proj.isVideo==1
-                                            video.projectVideo(src=proj.video playsinline muted loop)
+                                            video.projectVideo(src=proj.video playsinline muted loop preload="none")
                                         else
                                             img(src=proj.img)
                                 .projectTitle #{proj.title}
