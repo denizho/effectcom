@@ -321,6 +321,8 @@ h1 {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 */
     height: 0;
+    border-radius: 32px;
+    overflow: hidden;
 }
 .projectBWr{
     position: absolute;
@@ -767,6 +769,9 @@ input:active,input:focus, textarea:active, textarea:focus{
     .proj {
         margin-bottom: 32px;
 
+    }
+    .projectBox{
+        border-radius: 8px;
     }
 
 }
