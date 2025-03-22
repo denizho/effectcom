@@ -64,7 +64,10 @@ app.get("/start", async (req, res) => {
 });
 app.get("/projects", async (req, res) => {
     let projects=await db("projects").where({isDeleted:0, isEnable:1}).orderBy("sort")
-    console.log(projects)
+
+    for(let p of projects){
+        p.photos=await db("t_photos").where({projectid:p.id, isDeleted:0, isEnable:1}).orderBy("sort")
+    }
     res.render("pageProjects", {projects});
 });
 app.get("/feedBackForm", async (req, res) => {
