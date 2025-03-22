@@ -32,11 +32,18 @@ block content
     include footer
     script(src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js" )
     script.
+        let swipers=[]
         document.querySelectorAll(".splide").forEach(e=>{
-            new Splide( "#"+e.id, {
+           let sw= new Splide( "#"+e.id, {
                 type: 'loop',
                 lazyLoad:'nearby',
-                perPage: 1,autoplay:true} ).mount();
+                perPage: 1,autoplay:true} )
+               sw.mount();
+            sw.on("click", function (slide) { // listen for "click" event: fired when the user clicks any slide
+                sw.go(sw.index); // apply "go" method: slide to the index of the clicked slide (component)
+            });
+            swipers.push(sw)
+            e.closest(".proj").setAttribute("swipersindex",swipers.length-1 );
         })
         let videoObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(e => {
@@ -54,7 +61,13 @@ block content
             videoObserver.observe(e);
         })
         async function openProj(id){
-            if(document.getElementById("project"+id).getAttribute("isvideo")==0)
+            let prog=document.getElementById("project"+id)
+            if(prog.getAttribute("isvideo")==0){
+               let  swipersindex=proj.getAttribute("swipersindex")
+                if(swipersindex){
+                   // swipers[swipersindex].next();
+                }
+            }
                 return;
 
             let r=await fetch("/project/"+id);
