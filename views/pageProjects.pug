@@ -35,7 +35,7 @@ block content
         document.querySelectorAll(".splide").forEach(e=>{
             new Splide( "#"+e.id, {
                 type: 'loop',
-                perPage: 3,autoplay:true} ).mount();
+                perPage: 1,autoplay:true} ).mount();
         })
         let videoObserver = new IntersectionObserver((entries, observer) => {
             entries.forEach(e => {
