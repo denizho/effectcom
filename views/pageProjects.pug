@@ -22,6 +22,17 @@ block content
     include footer
 
     script.
+        let videoObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(e => {
+                if (e.isIntersecting)
+                    e.target.play();
+                else
+                    e.target.pause();
+            })
+        }, options);
+        document.querySelectorAll("video").forEach(e => {
+            videoObserver.observe(e);
+        })
         async function openProj(id){
             let r=await fetch("/project/"+id);
             let div=document.createElement("div")
