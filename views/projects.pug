@@ -16,7 +16,7 @@
                     .project
                         .projectGroup
                             .projectContent
-                                .projectBox(onclick=="document.location.href='/projects#project"+proj.id+"'")
+                                .projectBox(onclick="document.location.href='/projects#project"+proj.id+"'")
                                     .projectBWr
                                         if proj.isVideo==1
                                             video.projectVideo(src=proj.video playsinline muted loop preload="none")
