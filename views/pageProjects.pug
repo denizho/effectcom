@@ -22,7 +22,7 @@ block content
                                         .splide__list
                                             .splide__slide
                                                 img(src=proj.img)
-                                                for photo in proj.photos
+                                                each photo in proj.photos
                                                     img(src=photo.filepath)
                             .projTitle
                                 .projTitleText #{proj.title}
