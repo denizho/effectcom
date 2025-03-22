@@ -331,6 +331,7 @@ h1 {
 }
 .projectContent{
     width: 850px;
+    cursor: pointer;
 }
 
 .projectContainer {
