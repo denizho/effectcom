@@ -450,7 +450,7 @@ body.dark {
 }
 
 .main__projects__video__subtitle.dark {
-  color: var(--whiteColor);
+    color: var(--whiteColor);
 }
 
 footer.dark {
@@ -947,7 +947,6 @@ header.project {
 
   .main__projects__video__subtitle {
     font-size: 16px;
-    color: var(--mainTextColor);
     font-weight: 600;
     margin: 0;
     text-align: left;
