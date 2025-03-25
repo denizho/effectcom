@@ -441,6 +441,9 @@ body.dark {
 }
 
 
+.main__buttons__subtext.dark {
+  color: var(--whiteColor)}
+
 .main__projects__titleNight.dark {
   opacity: 100%;
 }
