@@ -81,6 +81,12 @@ block head
             height: 100%;
             width: auto;
         }
+        .collapsed{
+            display: none;
+        }
+        .expanded .collapsed {
+            display: block;
+        }
 
 block content
     .container#app
@@ -131,62 +137,65 @@ block content
                         label Описание
                         .input-group.input-group-sm
                             input.form-control(v-model="item.descr" v-on:change="updateProject(item)")
-                    .mt-2
-                        label URL главной иллюстрации (пропорции 16/9)
-                        .input-group.input-group-sm
-                            input.form-control(v-model="item.img" v-on:change="updateProject(item)" )
-                            .btn.btn-outline-secondary(v-on:click="uploadImage(item)") Загрузить
-                    .mt-2
-                        label URL видео
-                        .input-group.input-group-sm
-                            input.form-control(v-model="item.video" v-on:change="updateProject(item)")
-                        .btn-group.btn-group-sm.mt-2
-                            .btn.btn-secondary(v-if="item.isVideo==0" v-on:click="item.isVideo=1;updateProject(item)") Показана картинка
-                            .btn.btn-success(v-if="item.isVideo==1" v-on:click="item.isVideo=0;updateProject(item)" ) Показано видео
-                    .mt-2.photobank
-                        h4 Фото проекта
+                    .mt-2.expand(@click="expand($event)") Подробнее
+                    .collapsed
+                        .mt-2
+                            label URL главной иллюстрации (пропорции 16/9)
+                            .input-group.input-group-sm
+                                input.form-control(v-model="item.img" v-on:change="updateProject(item)" )
+                                .btn.btn-outline-secondary(v-on:click="uploadImage(item)") Загрузить
+                        .mt-2
+                            label URL видео
+                            .input-group.input-group-sm
+                                input.form-control(v-model="item.video" v-on:change="updateProject(item)")
+                            .btn-group.btn-group-sm.mt-2
+                                .btn.btn-secondary(v-if="item.isVideo==0" v-on:click="item.isVideo=1;updateProject(item)") Показана картинка
+                                .btn.btn-success(v-if="item.isVideo==1" v-on:click="item.isVideo=0;updateProject(item)" ) Показано видео
+                        .mt-2.photobank
+                            h4 Фото проекта
 
-                        .btn-group.btn-group-sm.mt-2
-                            .btn.btn-sm.btn-success(@click="addPhotosToProj(item)") Добавить фото (пропорции 16:9)
-                        .mt-2.photoPreview
-                                .mt-1.photoItem(v-for="photo in item.photos" v-if="photo.isDeleted==0")
-                                    .photoBox
-                                        img(:src="photo.filepath" loading="lazy" onclick="window.open(this.src)")
-                                    div
-                                        .mt-2
-                                            label Номер с начала
-                                            .input-group.input-group-sm
-                                                input.form-control(v-model="photo.sort" style="width:100px" v-on:change="updatePhoto(photo)")
-                                        .mt-2
-                                            .btn.btn-secondary(v-if="photo.isEnable==0" v-on:click="photo.isEnable=1;updatePhoto(photo)") Выключено
-                                            .btn.btn-success(v-if="photo.isEnable==1" v-on:click="photo.isEnable=0;updatePhoto(photo)") Включено
-                                            .btn.btn-danger(v-on:click="delPhoto(photo)" ) Удалить
-                                        ////.btn-group.btn-group-sm.mt-2
+                            .btn-group.btn-group-sm.mt-2
+                                .btn.btn-sm.btn-success(@click="addPhotosToProj(item)") Добавить фото (пропорции 16:9)
+                            .mt-2.photoPreview
+                                    .mt-1.photoItem(v-for="photo in item.photos" v-if="photo.isDeleted==0")
+                                        .photoBox
+                                            img(:src="photo.filepath" loading="lazy" onclick="window.open(this.src)")
+                                        div
+                                            .mt-2
+                                                label Номер с начала
+                                                .input-group.input-group-sm
+                                                    input.form-control(v-model="photo.sort" style="width:100px" v-on:change="updatePhoto(photo)")
+                                            .mt-2
+                                                .btn.btn-secondary(v-if="photo.isEnable==0" v-on:click="photo.isEnable=1;updatePhoto(photo)") Выключено
+                                                .btn.btn-success(v-if="photo.isEnable==1" v-on:click="photo.isEnable=0;updatePhoto(photo)") Включено
+                                                .btn.btn-danger(v-on:click="delPhoto(photo)" ) Удалить
+                                            ////.btn-group.btn-group-sm.mt-2
 
 
-                    .mt-2.preview.photobank
-                        h4 Превью проекта
-                        .projectBox
-                            .projectBWr(v-if="item.isVideo==0")
-                                .imgCourusel
-                                    img(:src="item.img")
-                                    img(:src="photo.filepath" loading="lazy" v-for="photo in item.photos")
-                            .projectBWr(v-if="item.isVideo==1")
-                                video(:src="item.video" playsinline muted autoplay loop)
-                            .projectAtitle
-                                .projectAtitleText {{item.title}}
+                        .mt-2.preview.photobank
+                            h4 Превью проекта
+                            .projectBox
+                                .projectBWr(v-if="item.isVideo==0")
+                                    .imgCourusel
+                                        img(:src="item.img")
+                                        img(:src="photo.filepath" loading="lazy" v-for="photo in item.photos")
+                                .projectBWr(v-if="item.isVideo==1")
+                                    video(:src="item.video" playsinline muted autoplay loop)
+                                .projectAtitle
+                                    .projectAtitleText {{item.title}}
 
 
 
                     .btn-group.btn-group-sm.mt-2
-                        .btn.btn-secondary(v-if="item.isEnable==0" v-on:click="item.isEnable=1;updateProject(item)") Выключено
-                        .btn.btn-success(v-if="item.isEnable==1" v-on:click="item.isEnable=0;updateProject(item)") Включено
-                        .btn.btn-danger(v-on:click="delProject(item)") Удалить
+                            .btn.btn-secondary(v-if="item.isEnable==0" v-on:click="item.isEnable=1;updateProject(item)") Выключено
+                            .btn.btn-success(v-if="item.isEnable==1" v-on:click="item.isEnable=0;updateProject(item)") Включено
+                            .btn.btn-danger(v-on:click="delProject(item)") Удалить
 
 
 
 
     script.
+
         let app=new Vue({
             el:"#app",
             data:{
@@ -196,6 +205,11 @@ block content
 
             },
             methods:{
+                expand:function(e){
+                    let ctrl=e.target;
+                    ctrl.closest(".project").classList.add("expanded")
+                    ctrl.style.display="none"
+                },
                 addPhotosToProj:async function(proj){
                     let inp = document.createElement("input")
                     inp.type = "file"
