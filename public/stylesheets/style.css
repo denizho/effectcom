@@ -450,6 +450,7 @@ body.dark {
 }
 
 .main__projects__video__subtitle.dark {
+  color: var(--whiteColor);
 }
 
 footer.dark {
