@@ -3,18 +3,47 @@ extends layout
 block content
     header.project
         .header__top
-            .header__logo.prj
-                a(href="/")
-                    img(src="images/footer/footer__logo.svg", alt="Логотип")
-            .header__buttons
-                .button.button1
-                    span Написать
-                    img(src="images/header/header__button1.svg", alt="Иконка", class="icon")
-                a.button.button2(href="/projects")
-                    span Проекты
-                    img(src="images/header/header__button2.svg", alt="Иконка", class="icon")
-                .button.button3
-                    img(src="images/header/header__button3.svg", alt="Иконка", class="icon-small") 
+                .header__logo.prj
+                    a(href="/")
+                        img(src="images/footer/footer__logo.svg", alt="Логотип")
+                .header__details.desktop
+                    .header__details__tel
+                        img(src="images/header/header__telfixed.svg", alt="Телефон")
+                        p +7(495) 226-31-26
+                    .header__details__email
+                        img(src="images/header/header__emailfixed.svg", alt="Телефон")
+                        p info@effectcomm.ru
+                .header__buttons
+                    .button.button1
+                        span Написать
+                        img(src="images/header/header__button1.svg", alt="Иконка", class="icon")
+                    a.button.button2(href="/projects")
+                        span Проекты
+                        img(src="images/header/header__button2.svg", alt="Иконка", class="icon")
+                    .button.button3
+                        img(src="images/header/header__button3.svg", alt="Иконка", class="icon-small")
+        .header.fixed 
+            .header__top
+                .header__logo.prj
+                    a(href="/")
+                        img(src="images/footer/footer__logo.svg", alt="Логотип")
+                .header__details.desktop
+                    .header__details__tel
+                        img(src="images/header/header__telfixed.svg", alt="Телефон")
+                        p +7(495) 226-31-26
+                    .header__details__email
+                        img(src="images/header/header__emailfixed.svg", alt="Телефон")
+                        p info@effectcomm.ru
+                .header__buttons
+                    .button.button1
+                        span Написать
+                        img(src="images/header/header__button1.svg", alt="Иконка", class="icon")
+                    a.button.button2(href="/projects")
+                        span Проекты
+                        img(src="images/header/header__button2.svg", alt="Иконка", class="icon")
+                    .button.button3
+                        img(src="images/header/header__button3.svg", alt="Иконка", class="icon-small")
+
     main
         .projects
             .projects__title

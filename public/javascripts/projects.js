@@ -1,42 +1,108 @@
-const button3 = document.querySelector(".button3");
-const button3Image = button3.querySelector("img");
+const button3 = document.querySelectorAll(".button3");
 const body = document.body;
 
 function updateTheme(isDark) {
+  const header = document.querySelector(".header.fixed");
+  const headerTop = header ? header.querySelector(".header__top") : null;
+
   body.classList.toggle("dark", isDark);
-
-  if (isDark) {
-    button3Image.src = "images/header/header__button3dark.svg";
-    button3.classList.add("dark");
-
-    const footerLogoImage = document.querySelector(".footer__logo.prj img");
-    const headerLogoImage = document.querySelector(".header__logo.prj img");
-    footerLogoImage.src = "images/header/header__logo.svg";
-    headerLogoImage.src = "images/header/header__logo.svg";
-    document.querySelector("footer").classList.add("dark");
-  } else {
-    button3Image.src = "images/header/header__button3.svg";
-    button3.classList.remove("dark");
-    document.querySelector("footer").classList.remove("dark");
-
-    const footerLogoImage = document.querySelector(".footer__logo img");
-    const headerLogoImage = document.querySelector(".header__logo.prj img");
-    footerLogoImage.src = "images/footer/footer__logo.svg";
-    headerLogoImage.src = "images/footer/footer__logo.svg";
+  if (header) {
+    header.classList.toggle("dark", isDark);
   }
-}
+  if (headerTop) {
+    headerTop.classList.toggle("dark", isDark);
+  }
 
+  const headerFixedLogo = document.querySelector(".header.fixed .header__logo img");
+    if (headerFixedLogo) {
+        if (isDark) {
+            headerFixedLogo.src = "images/header/header__logo.svg";
+        } else {
+            headerFixedLogo.src = "images/footer/footer__logo.svg";
+        }
+    } else {
+        console.error("Логотип не найден в header.fixed");
+    }
+    const detailsImages = document.querySelectorAll(".header__details img");
+    detailsImages.forEach((img) => {
+        if (isDark) {
+            if (img.src.includes("header__telfixed.svg")) {
+                img.src = "images/header/header__tel.svg"; 
+            } else if (img.src.includes("header__emailfixed.svg")) {
+                img.src = "images/header/header__email.svg"; 
+            }
+        } else {
+            if (img.src.includes("header__tel.svg")) {
+                img.src = "images/header/header__telfixed.svg";
+            } else if (img.src.includes("header__email.svg")) {
+                img.src = "images/header/header__emailfixed.svg";
+            }
+        }
+    });
+
+    
+    const detailTexts = document.querySelectorAll(".header__details p");
+    detailTexts.forEach((p) => {
+        if (isDark) {
+            p.style.color = "white";
+        } else {
+            p.style.color = "var(--mainTextColor)";
+        }
+    });
+  button3.forEach(button => {
+    const button3Image = button.querySelector("img");
+    if (isDark) {
+      if (button3Image) {
+        button3Image.src = "images/header/header__button3dark.svg";
+      }
+      button.classList.add("dark");
+
+      const footerLogoImage = document.querySelector(".footer__logo.prj img");
+      const headerLogoImage = document.querySelector(".header__logo.prj img");
+      footerLogoImage.src = "images/header/header__logo.svg";
+      headerLogoImage.src = "images/header/header__logo.svg";
+      document.querySelector("footer").classList.add("dark");
+    } else {
+      
+      if (button3Image) {
+        button3Image.src = "images/header/header__button3.svg";
+      }
+      button.classList.remove("dark");
+
+      document.querySelector("footer").classList.remove("dark");
+
+      const footerLogoImage = document.querySelector(".footer__logo img");
+      const headerLogoImage = document.querySelector(".header__logo.prj img");
+      footerLogoImage.src = "images/footer/footer__logo.svg";
+      headerLogoImage.src = "images/footer/footer__logo.svg";
+    }
+  })
+}
 const isDarkTheme = localStorage.getItem("darkTheme") === "true";
 updateTheme(isDarkTheme);
 
-button3.addEventListener("click", () => {
-  const isDark = !body.classList.contains("dark");
-  updateTheme(isDark);
-  localStorage.setItem("darkTheme", isDark);
+button3.forEach(button => {
+  button.addEventListener("click", () => {
+    const isDark = !body.classList.contains("dark");
+    updateTheme(isDark);
+    localStorage.setItem("darkTheme", isDark);
+  });
 });
 const openButton = document.querySelector(".button.button1");
+const fixedHeader = document.querySelector('.header.fixed');
+const mainContent = document.querySelector('main');
+fixedHeader.classList.remove('visible');
 
+window.addEventListener('scroll', () => {
+    if (window.scrollY > mainContent.offsetTop) {
+        fixedHeader.classList.add('visible');
+    } else {
+        fixedHeader.classList.remove('visible');
+    }
+});
 openButton.addEventListener("click", function () {
+  fixedHeader.style.display = 'none';
+
   const popup = document.createElement("div");
   popup.classList.add("popup");
 
@@ -152,11 +218,15 @@ openButton.addEventListener("click", function () {
 
   closeButton.addEventListener("click", function () {
     document.body.removeChild(popup);
+    fixedHeader.style.display = 'block';
+
   });
 
   window.addEventListener("click", function (event) {
     if (event.target === popup) {
       document.body.removeChild(popup);
+      fixedHeader.style.display = 'block';
+
     }
   });
 

@@ -65,6 +65,33 @@ header {
   font-family: "Montserrat", sans-serif;
 }
 
+.header.fixed {
+  position: fixed; 
+  top: -150px; 
+  left: 0;
+  right: 0;
+  background-color: white; 
+  z-index: 1000; 
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+  opacity: 0;
+  transition: top 0.3s ease, opacity 0.3s ease;
+}
+.fixed.visible {
+  top: 0;
+  opacity: 1;
+}
+
+.header.fixed > .header__top {
+  padding: 32px 0px;
+}
+
+.header.fixed.dark {
+  background-color: var(--mainTextColor);
+}
+
 .header__logo {
   width: var(--logoWidth);
   height: var(--logoHeight);
@@ -75,6 +102,35 @@ header {
   height: 100%;
 }
 
+.header__details{
+  display: flex;
+  flex-direction: row;
+  gap: 26px;
+}
+
+.header__details__email,.header__details__tel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+}
+
+.header__details__email img, .header__details__tel img {
+  width: 24px;
+  height: 24px;
+}
+
+.header__details__email p, .header__details__tel p {
+  font-size: 18px;
+  color: var(--whiteColor);
+
+}
+
+.header.fixed .header__details__email p, 
+.header.fixed .header__details__tel p {
+  color: rgba(32, 40, 42, 0.6); 
+}
 .header__buttons {
   display: flex;
   align-items: center;
@@ -442,7 +498,9 @@ body.dark {
 
 
 .main__buttons__subtext.dark {
-  color: var(--whiteColor)}
+  color: var(--whiteColor);
+  opacity: 1;
+}
 
 .main__projects__titleNight.dark {
   opacity: 100%;
@@ -465,17 +523,7 @@ footer.dark {
   background-color: white;
 }
 
-.button.button1:hover {
-  background-color: var(--Green100);
-}
 
-.button.button2:hover {
-  background-color: var(--Blue);
-}
-
-.button.button3:hover {
-  background-color: #d8f0fe;
-}
 
 .button.button1:active {
   background-color: var(--Green100DP);
@@ -633,9 +681,7 @@ textarea.error {
   cursor: pointer;
 }
 
-.file-button:hover {
-  background-color: var(--Green100);
-}
+
 .file-button:active {
   background-color: var(--Green100DP);
 }
@@ -778,6 +824,23 @@ header.project {
 .project__video:hover .project__button {
   opacity: 1;
 }
+@media (hover:hover) {
+  .button.button1:hover {
+    background-color: var(--Green100);
+  }
+  
+  .button.button2:hover {
+    background-color: var(--Blue);
+  }
+  
+  .button.button3:hover {
+    background-color: #d8f0fe;
+  }
+  .file-button:hover {
+    background-color: var(--Green100);
+  }
+}
+
 @media (max-width: 850px) {
   .mobile {
     display: block;
@@ -799,6 +862,30 @@ header.project {
 
   .header__buttons {
     gap: 20px;
+  }
+  .header.fixed {
+    background:none;
+    box-shadow: none;
+  }
+
+  .header.fixed.dark {
+    background:none;
+
+  }
+
+  .header.fixed > .header__top {
+    margin: 12px 8px;
+    padding: 12px 8px;
+    border-radius: 50px;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(32, 40, 42, 0.15);
+
+  }
+
+  .header.fixed > .header__top.dark {
+    background-color: #151919;
+    box-shadow: 0 4px 12px rgba(32, 40, 42, 0.5);
+
   }
 
   .button1,
