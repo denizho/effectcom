@@ -219,14 +219,14 @@ openButton.forEach(button => {
 
     closeButton.addEventListener("click", function () {
       document.body.removeChild(popup);
-      fixedHeader.style.display = 'block';
+      fixedHeader.style.display = 'flex';
 
     });
 
     window.addEventListener("click", function (event) {
       if (event.target === popup) {
         document.body.removeChild(popup);
-        fixedHeader.style.display = 'block';
+        fixedHeader.style.display = 'flex';
 
       }
     });
