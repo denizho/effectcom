@@ -137,7 +137,7 @@ block content
                         label Описание
                         .input-group.input-group-sm
                             input.form-control(v-model="item.descr" v-on:change="updateProject(item)")
-                    ..btn.btn-outline-secondary.btn-sm.mt-2.expand(@click="expand($event)") Подробнее
+                    .btn.btn-outline-secondary.btn-sm.mt-2.expand(@click="expand($event)") Подробнее
                     .collapsed
                         .mt-2
                             label URL главной иллюстрации (пропорции 16/9)
