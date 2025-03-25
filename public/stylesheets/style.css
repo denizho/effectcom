@@ -69,7 +69,6 @@ header {
   position: fixed; 
   top: -150px; 
   left: 0;
-  right: 0;
   background-color: white; 
   z-index: 1000; 
   display: flex;
