@@ -782,6 +782,23 @@ input:active,input:focus, textarea:active, textarea:focus{
     .projectBox{
         border-radius: 8px;
     }
+    .feedBackBtnWr{
+        display: block;
+    }
+    .feedBackBtnPolicy{
+        display: block;
+        width: 100%;
+        font-size: 10px;
+        margin: 12px auto;
+    }
+    .feedBackBtn{
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+    .feedBackFormRowEmpty{
+        display: none;
+    }
 
 
 
