@@ -548,9 +548,13 @@ input:active,input:focus, textarea:active, textarea:focus{
     background: #63696A;
 }
 .feedBackBtnWr{
-    display: flex;
+    display: flex
+;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+}
+.feedBackBtnPolicy{
+    padding-right: 32px;
 }
 .grecaptcha-badge{
     display:none;
