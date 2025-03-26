@@ -773,5 +773,11 @@ input:active,input:focus, textarea:active, textarea:focus{
     .projectBox{
         border-radius: 8px;
     }
+    .footerPolicy{
+        margin-top: 16px;
+        text-align: left;
+        width: 100%;
+    }
+
 
 }
