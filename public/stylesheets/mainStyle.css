@@ -562,6 +562,11 @@ input:active,input:focus, textarea:active, textarea:focus{
 .mobile{
     display: none;
 }
+.footerPolicy{
+    margin-top: 16px;
+    text-align: left;
+    width: 100%;
+}
 @media all and (max-width: 850px) {
 
     .logo{
@@ -773,11 +778,7 @@ input:active,input:focus, textarea:active, textarea:focus{
     .projectBox{
         border-radius: 8px;
     }
-    .footerPolicy{
-        margin-top: 16px;
-        text-align: left;
-        width: 100%;
-    }
+
 
 
 }
