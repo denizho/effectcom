@@ -17,6 +17,9 @@
         .feedBackFormRow
             textarea.fbData(placeholder="Комментарий (по желанию)" name="comment")
         .feedBackFormRow.feedBackBtnWr
+            .feedBackBtnPolicy
+                a(href="/uploads/6425b72bf6df1524f37732600119c8bd.pdf" download="personal_security_policy.pdf").
+                    Отправляя данную форму, вы даёте согласие на обработку ваших персональных данных в соответствии с Политикой обработки и защиты персональных данных и правилами использования информационного ресурса ООО «ЭФФЕКТКОММ».
             .feedBackBtn(onclick="sendFeedback()") Отправить
         .feedBackFormRow.feedBackSuccess.hidden
             .feedBackFormHead Спасибо, Ваше сообщение отправлено.
