@@ -530,6 +530,7 @@ input:active,input:focus, textarea:active, textarea:focus{
     font-style: normal;
     font-weight: 400;
     line-height: 26px;
+    border-radius: 8px;
 }
 .feedBackBtn{
     padding: 16px 32px;
