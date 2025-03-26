@@ -799,6 +799,9 @@ input:active,input:focus, textarea:active, textarea:focus{
     .feedBackFormRowEmpty{
         display: none;
     }
+    .feedBackForm .closeWr{
+        padding-bottom: 0;
+    }
 
 
 
