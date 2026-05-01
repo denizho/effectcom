@@ -71,10 +71,10 @@ app.get("/projects", async (req, res) => {
     }
     res.render("pageProjects", {projects, year:moment().format("YYYY")});
 });
-app.get("/feedBackForm", async (req, res) => {
+/*app.get("/feedBackForm", async (req, res) => {
 
     res.render("feedBackForm", );
-});
+});*/
 
 app.get("/project/:id", async (req, res) => {
     try {
