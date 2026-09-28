@@ -1,126 +1,41 @@
-extends layout
+.projects
+    .scroolSpy
+        .projectsTitleBox
+            .projectsTitleItem
+                .projectsTitleHeader.hiLite Проекты
+            .projectsTitleItem.decktop.projectsTitleActions
+                .projectsTitleAll
+                    a.projectsTitleAllTlte(href="https://effectcomm.ru/efc.pdf", target="_blank", rel="noopener") Презентация
+                .projectsTitleAll
+                    a.projectsTitleAllTlte(href="/projects") Все проекты
+                    .projectsTitleAllIco
+                        <svg width="40" height="41" viewBox="0 0 40 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24 9.5L35.5 21M35.5 21L24 32.5M35.5 21H4" stroke="#DDDDDD" stroke-opacity="0.866667" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+        .projectsWr
+            .projectContainer
+                each proj, i in projects
+                    .project
+                        .projectGroup
+                            .projectContent
+                                .projectBox(onclick="document.location.href='/projects#project"+proj.id+"'")
+                                    .projectBWr
+                                        if proj.isVideo==1
+                                            video.projectVideo(src=proj.video playsinline muted loop )
+                                        else
+                                            img(src=proj.img)
+                                .projectTitle #{proj.title}
+                            .projectNext
+                                if i<projects.length-1
+                                    .projectNextBtn(onclick="nextProj(this)") Следующий<br>проект
+                                else
+                                    .projectNextBtn(onclick="firstProj(this)") C<br>начала
 
-block content
-    header.project
-        .header__top
-                .header__logo.prj
-                    a(href="/")
-                        img(src="images/footer/footer__logo.svg", alt="Логотип")
-                .header__details.desktop
-                    .header__details__tel
-                        img(src="images/header/header__telfixed.svg", alt="Телефон")
-                        p +7(495) 226-31-26
-                    .header__details__email
-                        img(src="images/header/header__emailfixed.svg", alt="Телефон")
-                        p info@effectcomm.ru
-                .header__buttons
-                    .button.button1
-                        span Написать
-                        img(src="images/header/header__button1.svg", alt="Иконка", class="icon")
-                    a.button.button2(href="/projects")
-                        span Проекты
-                        img(src="images/header/header__button2.svg", alt="Иконка", class="icon")
-                    .button.button3
-                        img(src="images/header/header__button3.svg", alt="Иконка", class="icon-small")
-        .header.fixed 
-            .header__top
-                .header__logo.prj
-                    a(href="/")
-                        img(src="images/footer/footer__logo.svg", alt="Логотип")
-                .header__details.desktop
-                    .header__details__tel
-                        img(src="images/header/header__telfixed.svg", alt="Телефон")
-                        p +7(495) 226-31-26
-                    .header__details__email
-                        img(src="images/header/header__emailfixed.svg", alt="Телефон")
-                        p info@effectcomm.ru
-                .header__buttons
-                    .button.button1
-                        span Написать
-                        img(src="images/header/header__button1.svg", alt="Иконка", class="icon")
-                    a.button.button2(href="/projects")
-                        span Проекты
-                        img(src="images/header/header__button2.svg", alt="Иконка", class="icon")
-                    .button.button3
-                        img(src="images/header/header__button3.svg", alt="Иконка", class="icon-small")
 
-    main
-        .projects
-            .projects__title
-                p Проекты
-            .projects__videos 
-                .projects__videos
-                    .project__video(onclick="showVideo(this)" style="background-image: url('https://www.sostav.ru/images/news/2019/06/14/zs2zykzr.png');")
-                        .overlay
-                        .project__video__content
-                            .project__fullname
-                                p Полное название и описание
-                            .project__details
-                                .project__titles
-                                    .project__video__title
-                                        h2 Финансовый конгресс
-                                    .project__video__subtitle
-                                        h3 Санкт-Петербург, 2024
-                            .project__button
-                                .button__play
+        .projectsNext.mobile
+            .projectsNextItem
+                <svg width="164" height="16" viewBox="0 0 164 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M156 1.5L162.5 8M162.5 8L156 14.5M162.5 8H1" stroke="#DDDDDD" stroke-opacity="0.866667" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
 
-                        iframe.videoIframe(src="https://vkvideo.ru/video_ext.php?oid=-26284064&id=456297931&hd=2&autoplay=0", allow="encrypted-media; fullscreen; picture-in-picture;screen-wake-lock", frameborder="0", allowfullscreen, style="display: none;")
-
-                    .project__video(onclick="showVideo(this)" style="background-image: url('https://www.sostav.ru/images/news/2019/06/14/zs2zykzr.png');")
-                        .overlay
-                        .project__video__content
-                            .project__fullname
-                                p Полное название и описание
-                            .project__details
-                                .project__titles
-                                    .project__video__title
-                                        h2 Финансовый конгресс
-                                    .project__video__subtitle
-                                        h3 Санкт-Петербург, 2024
-                            .project__button
-                                .button__play
-
-                        iframe.videoIframe(src="https://vkvideo.ru/video_ext.php?oid=-26284064&id=456297931&hd=2&autoplay=0", allow="encrypted-media; fullscreen; picture-in-picture;screen-wake-lock", frameborder="0", allowfullscreen, style="display: none;")
-                    .project__video(onclick="showVideo(this)" style="background-image: url('https://www.sostav.ru/images/news/2019/06/14/zs2zykzr.png');")
-                        .overlay
-                        .project__video__content
-                            .project__fullname
-                                p Полное название и описание
-                            .project__details
-                                .project__titles
-                                    .project__video__title
-                                        h2 Финансовый конгресс
-                                    .project__video__subtitle
-                                        h3 Санкт-Петербург, 2024
-                            .project__button
-                                .button__play
-
-                        iframe.videoIframe(src="https://vkvideo.ru/video_ext.php?oid=-26284064&id=456297931&hd=2&autoplay=0", allow="encrypted-media; fullscreen; picture-in-picture;screen-wake-lock", frameborder="0", allowfullscreen, style="display: none;")
-    footer
-        .footer__container
-            .footer__content
-                .footer__logo.prj
-                    img(src="images/footer/footer__logo.svg")
-                .footer__data 
-                    p 2014-2025 © ООО «ЭффектКомм». ИНН 7716792536
-            .footer__contact
-                .footer__tel
-                    img(src="images/footer/footer__tel.svg")
-                    p +7(495) 226-31-26 
-                .footer__email
-                    img(src="images/footer/footer__email.svg")
-                    p info@effectcomm.ru
-    script(src="javascripts/projects.js")
-    script.
-        function showVideo(element) {
-            const iframe = element.querySelector('.videoIframe');
-            const overlay = element.querySelector('.overlay');
-
-            overlay.style.display = 'none';
-            iframe.style.display = 'block';
-
-            const src = iframe.src;
-            iframe.src = src + '&autoplay=1';
-        }
-        
-      
+            .projectsNextItem.projectsNextItemText(onclick="ffProj()") Следующий проект

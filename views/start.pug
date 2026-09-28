@@ -1,0 +1,120 @@
+extends newLayout
+
+block content
+    include header
+    .fsTower
+        include first
+    .fsTower
+        include second
+    .fsTower
+        include projects
+
+    include footer
+
+    script.
+        window.onscroll=(e)=>{
+
+            if(window.scrollY>133)
+                header.classList.add("bg")
+            else
+                header.classList.remove("bg")
+        }
+        if(localStorage.getItem("white"))
+            setWhite();
+        function setBlack(){
+            document.body.classList.remove("whiteBg")
+            localStorage.removeItem("white")
+        }
+        function setWhite() {
+            document.body.classList.add("whiteBg");
+            localStorage.setItem("white", true)
+        }
+        const options = {
+            root: null,
+            rootMargin: "10px",
+            threshold: .3,
+        };
+        let observer = new IntersectionObserver(handleIntersect, options);
+        let videoObserver = new IntersectionObserver((entries, observer)=>{
+            entries.forEach(e => {
+                if (e.isIntersecting)
+                    e.target.play();
+                else
+                    e.target.pause();
+            })
+        }, options);
+        function handleIntersect(entries, observer) {
+            entries.forEach(e=>{
+                if(e.isIntersecting)
+                    e.target.classList.add("visible")
+            })
+            console.log(entries)
+
+        }
+        document.querySelectorAll(".scroolSpy").forEach(e=>{
+            observer.observe(e);
+        })
+        document.querySelectorAll(".projectVideo").forEach(e => {
+            videoObserver.observe(e);
+        })
+        function ffProj(){
+            let arr=[]
+            document.querySelectorAll(".project").forEach(d=>[
+                arr.push(d)
+            ])
+            arr=arr.filter(d=>{
+                return ! d.classList.contains("noVisible")
+            })
+            if(arr.length>1)
+                nextProj(arr[0].querySelector(".projectNextBtn"))
+            else
+                firstProj();
+
+        }
+        function nextProj(ctrl){
+            ctrl.closest(".project").classList.add("noVisible")
+            setTimeout(()=>{
+                ctrl.closest(".project").classList.add("hidden")
+            },1000)
+
+        }
+        function firstProj(){
+            document.querySelectorAll(".project").forEach(p=>{
+                p.classList.remove("noVisible")
+                p.classList.remove("hidden")
+            })
+            console.log(document.querySelector(".projectContainer").scrollLeft)
+            document.querySelector(".projectsWr").scrollLeft=0;
+
+        }
+
+
+
+        var hidden, visibilityChange;
+        if (typeof document.hidden !== "undefined") {
+            hidden = "hidden";
+            visibilityChange = "visibilitychange";
+        } else if (typeof document.msHidden !== "undefined") {
+            hidden = "msHidden";
+            visibilityChange = "msvisibilitychange";
+        } else if (typeof document.webkitHidden !== "undefined") {
+            hidden = "webkitHidden";
+            visibilityChange = "webkitvisibilitychange";
+        }
+
+        var videoElement = document.getElementById("firstVideo");
+
+        function handleVisibilityChange() {
+            if (document[hidden] && videoElement.style.display != 'none') {
+                videoElement.play();
+            }
+        }
+
+        if (typeof document.addEventListener === "undefined" || hidden === undefined) {
+            console.log("This demo requires a browser, such as Google Chrome or Firefox, that supports the Page Visibility API.");
+        } else {
+            // Handle page visibility change
+            document.addEventListener(visibilityChange, handleVisibilityChange, false);
+
+        }
+

@@ -1,0 +1,356 @@
+extends layout
+block head
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css", integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH", crossorigin="anonymous")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.7.16/vue.min.js" integrity="sha512-Wx8niGbPNCD87mSuF0sBRytwW2+2ZFr7HwVDF8krCb3egstCc4oQfig+/cfg2OHd82KcUlOYxlSDAqdHqK5TCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    style.
+        .project{
+            padding: 12px;
+            background: #eee;
+            border-radius: 8px;
+        }
+        .preview {
+            width: 600px;
+        }
+
+        .projectBox {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+        }
+
+        .projectBWr {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .projectBWr img, .projectBWr video{
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .projectAtitle{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: #fff;
+            font-size: 14px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-end;
+            pointer-events: none;
+
+        }
+        .projectAtitleText{
+            pointer-events: none;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 0px 8px 8px 0;
+            background: linear-gradient(to bottom, #00000000, #000000FF);
+
+        }
+        .photoBox img{
+            width: 100%;
+            height: auto;
+        }
+        .photoItem{
+            display: grid;
+            grid-gap: 24px;
+            grid-template-columns: 100px 1fr;
+        }
+        .photobank{
+            margin-left: 24px;
+            padding: 12px;
+            background-color: #dedede;
+            border-radius: 12px;
+        }
+        .projectBWr{
+            width: 100%;
+            overflow: scroll;
+        }
+        .imgCourusel{
+            width: max-content;
+        }
+        .imgCourusel img{
+            display: inline-block;
+            height: 100%;
+            width: auto;
+        }
+        .collapsed{
+            display: none;
+        }
+        .expanded .collapsed {
+            display: block;
+        }
+
+block content
+    .container#app
+        .nav.nav-pills
+            .nav-item
+                a.nav-link(active href="#" @click="section='projects'") Проекты
+            .nav-item
+                a.nav-link(active href="#" @click="section='files'") Файлы
+
+        .mt-3.section(v-if="section=='files'")
+            h4 Файлы
+            .btn.btn-sm.btn-success(@click="addFile()") Добавить файл
+            .projects
+                .mt-3.project(v-for="item in files" v-if="item.isDeleted==0")
+                    .small id:{{item.id}}
+                    .mt-2
+                        label Номер с начала
+                        .input-group.input-group-sm
+                            input.form-control(v-model="item.sort" style="width:100px" v-on:change="updateFile(item)")
+                    .mt-2
+                        label Название
+                        .input-group.input-group-sm
+                            input.form-control(v-model="item.title" v-on:change="updateFile(item)")
+                    .mt-2
+                        label URL
+                        .input-group.input-group-sm
+                            input.form-control(v-model="item.url"  readonly)
+                            .btn.btn-outline-secondary(v-on:click="copy(item.url)") скопировать
+                    .btn-group.btn-group-sm.mt-2
+                        .btn.btn-secondary(v-if="item.isEnable==0" v-on:click="item.isEnable=1;updateFile(item)") Выключено
+                        .btn.btn-success(v-if="item.isEnable==1" v-on:click="item.isEnable=0;updateFile(item)") Включено
+                        .btn.btn-danger(v-on:click="delFile(item)") Удалить
+        .mt-3.section(v-if="section=='projects'")
+            h4 Проекты
+            .btn.btn-sm.btn-success(@click="addProj()") Добавить проект
+            .projects
+                .mt-3.project(v-for="item in projects" v-if="item.isDeleted==0")
+                    .small id:{{item.id}}
+                    .mt-2
+                        label Номер с начала
+                        .input-group.input-group-sm
+                            input.form-control(v-model="item.sort" style="width:100px" v-on:change="updateProject(item)")
+                    .mt-2
+                        label Название
+                        .input-group.input-group-sm
+                            input.form-control(v-model="item.title" v-on:change="updateProject(item)")
+                    .mt-2
+                        label Описание
+                        .input-group.input-group-sm
+                            input.form-control(v-model="item.descr" v-on:change="updateProject(item)")
+                    .btn.btn-outline-secondary.btn-sm.mt-2.expand(@click="expand($event)") Подробнее
+                    .collapsed
+                        .mt-2
+                            label URL главной иллюстрации (пропорции 16/9)
+                            .input-group.input-group-sm
+                                input.form-control(v-model="item.img" v-on:change="updateProject(item)" )
+                                .btn.btn-outline-secondary(v-on:click="uploadImage(item)") Загрузить
+                        .mt-2
+                            label URL видео
+                            .input-group.input-group-sm
+                                input.form-control(v-model="item.video" v-on:change="updateProject(item)")
+                            .btn-group.btn-group-sm.mt-2
+                                .btn.btn-secondary(v-if="item.isVideo==0" v-on:click="item.isVideo=1;updateProject(item)") Показана картинка
+                                .btn.btn-success(v-if="item.isVideo==1" v-on:click="item.isVideo=0;updateProject(item)" ) Показано видео
+                        .mt-2.photobank
+                            h4 Фото проекта
+
+                            .btn-group.btn-group-sm.mt-2
+                                .btn.btn-sm.btn-success(@click="addPhotosToProj(item)") Добавить фото (пропорции 16:9)
+                            .mt-2.photoPreview
+                                    .mt-1.photoItem(v-for="photo in item.photos" v-if="photo.isDeleted==0")
+                                        .photoBox
+                                            img(:src="photo.filepath" loading="lazy" onclick="window.open(this.src)")
+                                        div
+                                            .mt-2
+                                                label Номер с начала
+                                                .input-group.input-group-sm
+                                                    input.form-control(v-model="photo.sort" style="width:100px" v-on:change="updatePhoto(photo)")
+                                            .mt-2
+                                                .btn.btn-secondary(v-if="photo.isEnable==0" v-on:click="photo.isEnable=1;updatePhoto(photo)") Выключено
+                                                .btn.btn-success(v-if="photo.isEnable==1" v-on:click="photo.isEnable=0;updatePhoto(photo)") Включено
+                                                .btn.btn-danger(v-on:click="delPhoto(photo)" ) Удалить
+                                            ////.btn-group.btn-group-sm.mt-2
+
+
+                        .mt-2.preview.photobank
+                            h4 Превью проекта
+                            .projectBox
+                                .projectBWr(v-if="item.isVideo==0")
+                                    .imgCourusel
+                                        img(:src="item.img")
+                                        img(:src="photo.filepath" loading="lazy" v-for="photo in item.photos")
+                                .projectBWr(v-if="item.isVideo==1")
+                                    video(:src="item.video" playsinline muted autoplay loop)
+                                .projectAtitle
+                                    .projectAtitleText {{item.title}}
+
+
+
+                    .btn-group.btn-group-sm.mt-2
+                            .btn.btn-secondary(v-if="item.isEnable==0" v-on:click="item.isEnable=1;updateProject(item)") Выключено
+                            .btn.btn-success(v-if="item.isEnable==1" v-on:click="item.isEnable=0;updateProject(item)") Включено
+                            .btn.btn-danger(v-on:click="delProject(item)") Удалить
+
+
+
+
+    script.
+
+        let app=new Vue({
+            el:"#app",
+            data:{
+                section:"projects",
+                projects:[],
+                files:[]
+
+            },
+            methods:{
+                expand:function(e){
+                    let ctrl=e.target;
+                    ctrl.closest(".project").classList.add("expanded")
+                    ctrl.style.display="none"
+                },
+                addPhotosToProj:async function(proj){
+                    let inp = document.createElement("input")
+                    inp.type = "file"
+                    inp.setAttribute("multiple", true)
+                    inp.setAttribute("accept", "image/png, image/jpeg")
+                    inp.click()
+                    inp.onchange = async () => {
+                        for (let file of inp.files) {
+                            let formData = new FormData()
+                            formData.append('file', file, file.name);
+                            let ret = await fetch("/api/uploadFile", {
+                                method: 'post',
+                                body: formData,
+                            })
+
+                            ret = await fetch("/api/addPhotoToProj", {
+                                method: 'post',
+                                headers: {
+                                    'Accept': 'application/json',
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify( {
+                                    id:proj.id,
+                                    photo:await ret.json()
+                                }),
+                            })
+                            proj.photos.unshift(await ret.json())
+
+                        }
+                    }
+                },
+                copy:async function(text) {
+                    await navigator.clipboard.writeText(text)
+                },
+
+                addFile:async function(item) {
+                    let inp = document.createElement("input")
+                    inp.type = "file"
+                    inp.setAttribute("multiple", false)
+                    inp.onchange = async () => {
+                        for (let file of inp.files) {
+                            let formData = new FormData()
+                            formData.append('file', file, file.name);
+                            let ret = await fetch("/api/addFile", {
+                                method: 'post',
+                                body: formData,
+                            })
+
+                             this.files.unshift(await ret.json());
+                            console.log(this.files)
+                        }
+                    }
+                    inp.click()
+                },
+                uploadImage:async function(item) {
+                    let inp = document.createElement("input")
+                    inp.type = "file"
+                    inp.setAttribute("multiple", false)
+                    inp.setAttribute("accept", "image/png, image/jpeg")
+                    inp.click()
+                    inp.onchange = async () => {
+                        for (let file of inp.files) {
+                            let formData = new FormData()
+                            formData.append('file', file, file.name);
+                            let ret = await fetch("/api/uploadFile", {
+                                method: 'post',
+                                body: formData,
+                            })
+                             item.img = await ret.json()
+                            await this.updateProject(item);
+                        }
+                    }
+                },
+                delPhoto: async function (item) {
+                    if (confirm("Вы уверены?")) {
+                        item.isDeleted = 1;
+                        await this.updatePhoto(item);
+                    }
+                },
+                delFile: async function (item) {
+                    if (confirm("Вы уверены?")) {
+                        item.isDeleted = 1;
+                        await this.updateFile(item);
+                    }
+                },
+                delProject:async function(item){
+                    if(confirm("Вы уверены?"))
+                    {
+                        item.isDeleted=1;
+                        await this.updateProject(item);
+                    }
+                },
+                updatePhoto: async function (item) {
+                    let r = await fetch("/api/photo", {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(item)
+                    })
+                },
+                updateFile: async function (item) {
+                    let r = await fetch("/api/file", {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(item)
+                    })
+                },
+                updateProject:async function(item) {
+                    let r = await fetch("/api/project", {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(item)
+                    })
+                },
+                addProj:async function() {
+                    let r = await fetch("/api/project", {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+
+                        body: JSON.stringify({})
+                    })
+                    this.projects.unshift((await r.json()))
+                }
+            },
+            mounted:async function(){
+                console.log("vue ready")
+                let r = await fetch("/api/projects")
+                this.projects=await r.json()
+                r = await fetch("/api/files")
+                this.files = await r.json()
+            }
+        })
+

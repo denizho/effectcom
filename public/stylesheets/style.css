@@ -97,6 +97,9 @@ header {
   width: var(--logoWidth);
   height: var(--logoHeight);
 }
+.projectContent{
+  cursor: pointer;
+}
 
 .header__logo img {
   width: 100%;

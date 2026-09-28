@@ -1,0 +1,147 @@
+extends newLayout
+block head
+    <link href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css" rel="stylesheet">
+
+block content
+    style.
+        .splide__pagination {
+            top: .5em;
+            bottom: inherit;
+        }
+        .splide__slide img{
+            border-radius: 0;
+        }
+    .mustWhite
+        include header
+    .fsTower
+        .projWr
+            h1.projPage Проекты
+            .projBox
+                each proj in projects
+                    .proj.scroolSpy(onclick="openProj("+proj.id+")" id="project"+proj.id isvideo=proj.isVideo)
+                        .projectBox
+                            .projectBWr
+                                if proj.isVideo == 1
+                                    video(src=proj.video muted loop playsinline)
+                                else
+                                    //img(src=proj.img)
+                                    .splide(id="splide"+proj.id)
+                                        .splide__track
+                                            ul.splide__list
+                                                li.splide__slide
+                                                    img(src=proj.img)
+                                                each photo in proj.photos
+                                                    li.splide__slide
+                                                        img(src=photo.filepath)
+                            .projTitle
+                                .projTitleText #{proj.title}
+                                .projTitleDescr #{proj.descr}
+
+    include footer
+    script(src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js" )
+    script.
+        let swipers=[]
+        document.querySelectorAll(".splide").forEach(e=>{
+           let sw= new Splide( "#"+e.id, {
+                type: 'loop',
+                lazyLoad:'nearby',
+                perPage: 1,autoplay:true} )
+               sw.mount();
+            sw.on("click", function (slide) { // listen for "click" event: fired when the user clicks any slide
+                sw.go(sw.index); // apply "go" method: slide to the index of the clicked slide (component)
+            });
+            swipers.push(sw)
+            e.closest(".proj").setAttribute("swipersindex",swipers.length-1 );
+        })
+        let videoObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(e => {
+                if (e.isIntersecting)
+                    e.target.play();
+                else
+                    e.target.pause();
+            })
+        }, {
+            root: null,
+            rootMargin: "10px",
+            threshold: .3,
+        });
+        document.querySelectorAll("video").forEach(e => {
+            videoObserver.observe(e);
+        })
+        async function openProj(id){
+            let prog=document.getElementById("project"+id)
+            if(prog.getAttribute("isvideo")==0){
+               let  swipersindex=prog.getAttribute("swipersindex")
+                if(swipersindex){
+                    swipers[swipersindex].go(swipers[swipersindex].index+1)
+                }
+                return;
+            }
+
+
+            let r=await fetch("/project/"+id);
+            let div=document.createElement("div")
+            div.classList.add("fsDiv");
+            div.innerHTML=await r.text()
+            document.querySelectorAll("video").forEach(d => {
+                d.pause()
+            })
+            document.body.appendChild(div)
+            document.body.style.overflow="hidden"
+
+        }
+        window.onscroll=(e)=>{
+
+            if(window.scrollY>36)
+                header.classList.add("bg")
+            else
+                header.classList.remove("bg")
+        }
+        if(localStorage.getItem("white"))
+            setWhite();
+        function setBlack(){
+            document.body.classList.remove("whiteBg")
+            localStorage.removeItem("white")
+        }
+        function setWhite() {
+            document.body.classList.add("whiteBg");
+            localStorage.setItem("white", true)
+        }
+        const options = {
+            root: null,
+            rootMargin: "10px",
+            threshold: .3,
+        };
+        let observer = new IntersectionObserver(handleIntersect, options);
+        function handleIntersect(entries, observer) {
+            entries.forEach(e=>{
+                if(e.isIntersecting) {
+                    e.target.classList.add("visible")
+                    let video=e.target.querySelector("video")
+                    if(video)
+                        video.play()
+                        }
+            })
+            console.log(entries)
+
+        }
+        document.querySelectorAll(".scroolSpy").forEach(e=>{
+            observer.observe(e);
+        })
+        function nextProj(ctrl){
+            ctrl.closest(".project").classList.add("noVisible")
+            setTimeout(()=>{
+                ctrl.closest(".project").classList.add("hidden")
+            },1000)
+
+        }
+        function firstProj(){
+            document.querySelectorAll(".project").forEach(p=>{
+                p.classList.remove("noVisible")
+                p.classList.remove("hidden")
+            })
+            console.log(document.querySelector(".projectContainer").scrollLeft)
+            document.querySelector(".projectsWr").scrollLeft=0;
+
+        }
+
